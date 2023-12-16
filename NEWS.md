@@ -1,3 +1,6 @@
+# fanyi 0.0.5.001
+
++ `set_translate_option()` supports storing multiple appid and key for different translators (although currently only 'baidu' is supported) (2023-12-16, Sat)
 
 # fanyi 0.0.5
 

@@ -25,15 +25,19 @@ set_translate_option <- function(appid, key, source = "baidu") {
     if (source != "baidu") stop ("currently, only baidu is supported")
 
     set_translate_source(source)
-    set_translate_appkey(appid, key)
+    set_translate_appkey(appid, key, source)
 }
 
 set_translate_source <- function(source) {
     options(yulab_translate_source = source)
 }
 
-set_translate_appkey <- function(appid, key) {
-    options(yulab_translate = list(appid = appid, key = key))
+set_translate_appkey <- function(appid, key, source) {
+    opts <- getOption('yulab_translate', list())
+    x <- list()
+    x[[source]] <- list(appid = appid, key = key)
+    opts <- modifyList(opts, x)
+    options(yulab_translate = x)
 }
 
 get_translate_source <- function() {
@@ -41,15 +45,12 @@ get_translate_source <- function() {
 }
 
 get_translate_appkey <- function() {
-    res <- getOption('yulab_translate')
-    if (!is.null(res)) return(res)
-
     src <- get_translate_source()
-    if (src == "baidu") {
-        # res <- getOption('yulab_translate', .baidu_appkey)
-        res <- getOption('yulab_translate')
-    }
-    
+
+    appkeys <- getOption('yulab_translate', list())
+
+    res <- appkeys[[src]]
+
     if (is.null(res)) stop("Please set your appid and key via set_translate_appkey()")
 
     return(res)
@@ -76,7 +77,7 @@ get_translate_appkey <- function() {
 #' @author Guangchuang Yu 
 #' @export
 translate <- function(x, from = 'en', to = 'zh') {
-    src <- getOption('yulab_translate_source', "baidu")
+    src <- get_translate_source()
     if (src == "baidu") {
         res <- baidu_translate(x, from = from, to = to)
     } else {
