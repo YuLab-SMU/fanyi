@@ -37,7 +37,7 @@ set_translate_appkey <- function(appid, key, source) {
     x <- list()
     x[[source]] <- list(appid = appid, key = key)
     opts <- modifyList(opts, x)
-    options(yulab_translate = x)
+    options(yulab_translate = opts)
 }
 
 get_translate_source <- function() {
