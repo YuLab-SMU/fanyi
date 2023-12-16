@@ -44,12 +44,14 @@ get_translate_source <- function() {
     getOption('yulab_translate_source', "baidu")
 }
 
-get_translate_appkey <- function() {
-    src <- get_translate_source()
+get_translate_appkey <- function(source) {
+    if (missing(source)) {
+        source <- get_translate_source()
+    }
 
     appkeys <- getOption('yulab_translate', list())
 
-    res <- appkeys[[src]]
+    res <- appkeys[[source]]
 
     if (is.null(res)) stop("Please set your appid and key via set_translate_appkey()")
 

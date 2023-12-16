@@ -1,5 +1,6 @@
-# fanyi 0.0.5.001
+# fanyi 0.0.5.002
 
++ introduce 'source' parameter in `get_translate_appkey()` (2023-12-17, Sun)
 + `set_translate_option()` supports storing multiple appid and key for different translators (although currently only 'baidu' is supported) (2023-12-16, Sat)
 
 # fanyi 0.0.5

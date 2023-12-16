@@ -19,7 +19,7 @@ baidu_translate <- function(x, from = 'en', to = 'zh') {
 ##' @importFrom openssl md5
 baidu_translate_query <- function(x, from, to) {
     salt <- sample.int(1e+05, 1) 
-    .info <- get_translate_appkey()
+    .info <- get_translate_appkey('baidu')
     sign <- sprintf("%s%s%s%s", .info$appid, x, salt, .info$key)
     .sign <- openssl::md5(sign)
 
