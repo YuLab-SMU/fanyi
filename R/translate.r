@@ -22,7 +22,7 @@ cn2en <- function (x) {
 #' @author Guangchuang Yu 
 #' @export
 set_translate_option <- function(appid, key, source = "baidu") {
-    if (source != "baidu") stop ("currently, only baidu is supported")
+    if (source != "baidu" & source != "youdao") stop ("currently, only baidu & youdao is supported")
 
     set_translate_source(source)
     set_translate_appkey(appid, key, source)
@@ -82,8 +82,10 @@ translate <- function(x, from = 'en', to = 'zh') {
     src <- get_translate_source()
     if (src == "baidu") {
         res <- baidu_translate(x, from = from, to = to)
+    } else if (src == "youdao") {
+        res <- youdao_translate(x, from = from, to = to)
     } else {
-        stop ("only baidu translate is supported")
+        stop("only youdao translate is supported")
     }
 
     return(res)
