@@ -29,6 +29,7 @@ truncate_func <- function(x) {
 ##' @importFrom utils URLencode
 
 .youdao_translate <- function(x, from = 'en', to = 'zh-CHS') {
+    query <- youdao_translate_query(x, from = from, to = to)
     url <- URLencode(query)
     res <- jsonlist::fromJSON(rawToChar(httr::GET(url))$content)
     return(res$translation)
