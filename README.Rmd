@@ -87,9 +87,9 @@ library(fanyi)
 ## run `set_translate_option()` to setup
 ##
 
-text <- 'clusterProfiler supports exploring functional characteristics 
-    of both coding and non-coding genomics data for thousands of species 
-    with up-to-date gene annotation'
+text <- 'clusterProfiler supports exploring functional 
+    characteristics of both coding and non-coding genomics 
+    data for thousands of species with up-to-date gene annotation'
 ```
 
 ```{r eval=FALSE}
