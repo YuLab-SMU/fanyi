@@ -80,7 +80,7 @@ library(fanyi)
 library(DOSE)
 library(enrichplot)
 
-```{r}
+```{r translate, results='asis'}
 library(fanyi)
 
 ##
@@ -90,10 +90,22 @@ library(fanyi)
 text <- 'clusterProfiler supports exploring functional characteristics 
     of both coding and non-coding genomics data for thousands of species 
     with up-to-date gene annotation'
+```
 
+```{r eval=FALSE}
 translate(text, from='en', to='zh')
+```
 
+```{r results='asis', echo=FALSE}
+cat(sprintf(">%s", translate(text, from='en', to='zh')), sep="\n\n")
+```
+
+```{r eval=FALSE}
 translate(text, from='en', to='jp')
+```
+
+```{r results='asis', echo=FALSE}
+cat(sprintf(">%s", translate(text, from='en', to='jp')), sep="\n\n")
 ```
 
 ```{r ggplot-fanyi, fig.width=14, fig.height=6}
@@ -125,7 +137,25 @@ d <- data.frame(desc=res$description,
 d
 ```
 
-```{r message=FALSE, results='asis'}
-cat(res$summary, sep="\n\n")
-cat(translate(res$summary), sep="\n\n")
+```{r eval=FALSE}
+res$summary
+```
+
+```{r message=FALSE, results='asis', echo=FALSE}
+format_print <- function(x) {
+  # add item label
+  x2 <- paste0("[", seq_along(x), "] ", x)
+  # print as quoted text
+  cat(sprintf(">%s", x2), sep="\n\n")
+}
+
+format_print(res$summary)
+```
+
+```{r eval=FALSE}
+translate(res$summary)
+```
+
+```{r message=FALSE, results='asis', echo=FALSE}
+format_print(translate(res$summary))
 ```
