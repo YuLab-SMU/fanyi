@@ -92,14 +92,10 @@ get_translate_appkey <- function(source) {
 #' @export
 translate <- function(x, from = 'en', to = 'zh') {
     src <- get_translate_source()
-    if (src == "baidu") {
-        res <- baidu_translate(x, from = from, to = to)
-    } else if (src == "bing") {
-        res <- bing_translate(x, from = from, to = to)
-    } else {
-        stop ("Please set your appid and key via set_translate_option()")
-    }
 
-    return(res)
+    switch(src,
+           baidu = baidu_translate(x, from = from, to = to),
+           bing = bing_translate(x, from = from, to = to)
+        )
 }
 
