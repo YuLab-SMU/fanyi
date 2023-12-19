@@ -1,0 +1,161 @@
+---
+output:
+  md_document:
+    variant: gfm
+html_preview: false
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+
+# `fanyi`: Translate Words or Sentences via Online Translators
+
+
+
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/fanyi?color=green)](https://cran.r-project.org/package=fanyi)
+![](http://cranlogs.r-pkg.org/badges/grand-total/fanyi?color=green)
+![](http://cranlogs.r-pkg.org/badges/fanyi?color=green)
+![](http://cranlogs.r-pkg.org/badges/last-week/fanyi?color=green)
+
+
+```{r comment="", echo=FALSE, results='asis'}
+cat(packageDescription('fanyi')$Description)
+```
+
+
+## :writing_hand: Authors
+
+Guangchuang YU
+
+School of Basic Medical Sciences, Southern Medical University
+
+<https://yulab-smu.top>
+
+
+
+## :arrow_double_down: Installation
+
+Get the released version from CRAN:
+
+```r
+install.packages("fanyi")
+```
+
+Or the development version from github:
+
+```r
+## install.packages("yulab.utils")
+yulab.utils::install_zip_gh("YuLab-SMU/fanyi")
+```
+
+## :beginner: Usages
+
+### to switch from different online translators:
+
+use `set_translate_source()` to set the default translator using in `translate()`
+
+
+### to use `baidu` translate:
+
+1. go to <https://fanyi-api.baidu.com/manage/developer> and regist as an individual developer
+2. get `appid` and `key` (密钥) 
+3. set  `appid` and `key`  with `source = "baidu"` using `set_translate_option()`
+4. have fun with `translate()` 
+
+### to use `bing` translate:
+
+1. regist a free azure account
+2. enable `Azure AI services | Translator` from <https://portal.azure.com/>
+3. create a translation service with free tier pricing version (you need a visa/master card to complete registion and will not be charged until exceed 2 million characters monthly)
+4. get your `key` and `region`
+5. set `key` and `region` with `source = "bing"` using `set_translate_option()`
+6. have fun with `translate()`
+
+
+## :ideograph_advantage: Examples
+
+```{r include=FALSE}
+options(width = 80)
+library(fanyi)
+library(DOSE)
+library(enrichplot)
+
+```{r translate, results='asis'}
+library(fanyi)
+
+##
+## run `set_translate_option()` to setup
+##
+
+text <- 'clusterProfiler supports exploring functional 
+    characteristics of both coding and non-coding genomics 
+    data for thousands of species with up-to-date gene annotation'
+```
+
+```{r eval=FALSE}
+translate(text, from='en', to='zh')
+```
+
+```{r results='asis', echo=FALSE}
+cat(sprintf(">%s", translate(text, from='en', to='zh')), sep="\n\n")
+```
+
+```{r eval=FALSE}
+translate(text, from='en', to='jp')
+```
+
+```{r results='asis', echo=FALSE}
+cat(sprintf(">%s", translate(text, from='en', to='jp')), sep="\n\n")
+```
+
+```{r ggplot-fanyi, fig.width=14, fig.height=6}
+library(DOSE)
+library(enrichplot)
+data(geneList)
+de <- names(geneList)[1:200]
+x <- enrichDO(de)
+p <- dotplot(x)
+p2 <- translate_ggplot(p, axis='y')
+aplot::plot_list(p, p2)
+```
+
+
+
+```{r message=FALSE}
+symbol <- c("CCR7", "CD3E")
+gene <- clusterProfiler::bitr(symbol, 
+            fromType = 'SYMBOL', 
+            toType = 'ENTREZID', 
+            OrgDb = 'org.Hs.eg.db')
+
+gene
+
+res <- gene_summary(gene$ENTREZID)
+names(res)
+d <- data.frame(desc=res$description,
+              desc2=translate(res$description))
+d
+```
+
+```{r eval=FALSE}
+res$summary
+```
+
+```{r message=FALSE, results='asis', echo=FALSE}
+format_print <- function(x) {
+  # add item label
+  x2 <- paste0("[", seq_along(x), "] ", x)
+  # print as quoted text
+  cat(sprintf(">%s", x2), sep="\n\n")
+}
+
+format_print(res$summary)
+```
+
+```{r eval=FALSE}
+translate(res$summary)
+```
+
+```{r message=FALSE, results='asis', echo=FALSE}
+format_print(translate(res$summary))
+```

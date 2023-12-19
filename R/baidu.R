@@ -1,7 +1,12 @@
 ##' @rdname translate
 ##' @export
 baidu_translate <- function(x, from = 'en', to = 'zh') {
-    vapply(x, .baidu_translate, from = from, to = to, FUN.VALUE = character(1))
+    res <- vapply(x, .baidu_translate, 
+            from = from, to = to, 
+            FUN.VALUE = character(1)
+        )
+    names(res) <- NULL
+    return(res)
 }
 
 ##' @importFrom jsonlite fromJSON
@@ -30,4 +35,5 @@ baidu_translate_query <- function(x, from, to) {
                 )
     return(.query)
 }
+
 

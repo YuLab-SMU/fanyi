@@ -1,6 +1,6 @@
 Package: fanyi
 Title: Translate Words or Sentences via Online Translators
-Version: 0.0.5.002
+Version: 0.0.5.005
 Authors@R: c(
        person("Guangchuang", "Yu", 
               email = "guangchuangyu@gmail.com", 
@@ -12,9 +12,14 @@ Description: Useful functions to translate text for multiple languages using onl
     For example, by translating error messages and descriptive analysis results into a language familiar
     to the user, it enables a better understanding of the information, thereby reducing the barriers caused by language.
 Imports:
+  ggfun,
   httr,
   jsonlite,
-  openssl
+  openssl,
+  rentrez,
+  utils,
+  uuid,
+  yulab.utils (> 0.1.1)
 ByteCompile: true
 License: Artistic-2.0
 URL: https://github.com/YuLab-SMU/fanyi
