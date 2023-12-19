@@ -2,11 +2,7 @@
 
 # `fanyi`: Translate Words or Sentences via Online Translators
 
-<style type="text/css">
-pre code {
-  white-space: pre-wrap;
-}
-</style>
+
 
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/fanyi?color=green)](https://cran.r-project.org/package=fanyi)
 ![](http://cranlogs.r-pkg.org/badges/grand-total/fanyi?color=green)
