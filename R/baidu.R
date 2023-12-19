@@ -31,3 +31,4 @@ baidu_translate_query <- function(x, from, to) {
     return(.query)
 }
 
+

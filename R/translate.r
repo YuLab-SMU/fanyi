@@ -18,25 +18,41 @@ cn2en <- function (x) {
 #' @param appid appid, "bing translate" will not use this input. 
 #' @param key app key
 #' @param source translation engine
-#' @param location this is for bing use only, translation engine location, currently only'southeastasia' is supported
+#' @param location this is for bing use only, translation engine location, depends on your Azure service setting
 #' @return No return value, called for side effects
 #' @author Guangchuang Yu 
 #' @export
 set_translate_option <- function(appid, key, location="southeastasia", source = "baidu") {
-    # if (source != "baidu") stop ("currently, only baidu is supported")
+    source <- match.arg(source, c("baidu", "bing"))
     set_translate_source(source)
     set_translate_appkey(appid, key, location, source)
 }
 
+#' set source of online translator service
+#' 
+#' This function allows users to set the default source for `translate()` function
+#' @rdname set-translate-source
+#' @param source translation engine
+#' @return No return value, called for side effects
+#' @author Guangchuang Yu 
+#' @export
 set_translate_source <- function(source) {
     options(yulab_translate_source = source)
 }
 
-set_translate_appkey <- function(appid, key, location, source) {
-    opts <- getOption('yulab_translate', list())
+##' @importFrom utils modifyList
+set_translate_appkey <- function(appid=NULL , key=NULL, location=NULL, source) {
+    newkey <- list(appid = appid, key = key)
+    if (source == "bing") {
+        newkey$location <- location
+    }
+
     x <- list()
-    x[[source]] <- list(appid = appid, key = key, location=location)
+    x[[source]] <- newkey
+
+    opts <- getOption('yulab_translate', list())
     opts <- modifyList(opts, x)
+    
     options(yulab_translate = opts)
 }
 
@@ -78,24 +94,12 @@ translate <- function(x, from = 'en', to = 'zh') {
     src <- get_translate_source()
     if (src == "baidu") {
         res <- baidu_translate(x, from = from, to = to)
+    } else if (src == "bing") {
+        res <- bing_translate(x, from = from, to = to)
     } else {
-        stop ("only baidu translate is supported")
+        stop ("Please set your appid and key via set_translate_option()")
     }
 
     return(res)
 }
-
-
-translate_bing <- function(x, from = 'en', to = 'zh') {
-    src <- get_translate_appkey()
-    api_key <- src$key
-    location <- src$location
-    text_to_translate <- x
-    translation_result <- bing_translate_text(api_key, location, text_to_translate, from, to)
-    print(translation_result)
-    return(translation_result)
-}
-
-# set_translate_option(appid = "", key ="hide", location = 'southeastasia', source = "bing")
-# translate_bing("I am superman")   
 
