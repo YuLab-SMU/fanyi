@@ -1,5 +1,6 @@
-# fanyi 0.0.5.004
+# fanyi 0.0.5.005
 
++ `gene_summary()` to query gene summary and `symbol2entrez()` to convert ID, both using NCBI Gene database (2023-12-19, Tue)
 + `translate_ggplot()` allows translating axis labels of a ggplot (2023-12-19, Tue)
 + `bing_translate()` supports using bing translate service (2023-12-19, Tue, #1)
 + introduce 'source' parameter in `get_translate_appkey()` (2023-12-17, Sun)

@@ -89,8 +89,10 @@ get_translate_appkey <- function(source) {
 #' #
 #' # translate('hello world', from = 'en', to = 'zh')
 #' @author Guangchuang Yu 
+#' @importFrom yulab.utils use_perl
 #' @export
 translate <- function(x, from = 'en', to = 'zh') {
+    x <- gsub("\\s*\n+\\s*", " ", x, perl = use_perl())
     src <- get_translate_source()
 
     switch(src,

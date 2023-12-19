@@ -1,7 +1,12 @@
 ##' @rdname translate
 ##' @export
 bing_translate <- function(x, from = 'en', to='zh') {
-    vapply(x, .bing_translate, from = from, to = to, FUN.VALUE = character(1))
+    res <- vapply(x, .bing_translate, 
+            from = from, to = to, 
+            FUN.VALUE = character(1)
+        )
+    names(res) <- NULL
+    return(res)
 }
 
 # set_translate_option(key ="hide", region = 'southeastasia', source = "bing")
