@@ -108,15 +108,7 @@ gene <- clusterProfiler::bitr(symbol,
             fromType = 'SYMBOL', 
             toType = 'ENTREZID', 
             OrgDb = 'org.Hs.eg.db')
-```
 
-    ## 
-
-    ## 
-
-    ## 'select()' returned 1:1 mapping between keys and columns
-
-``` r
 gene
 ```
 
