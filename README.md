@@ -2,6 +2,12 @@
 
 # `fanyi`: Translate Words or Sentences via Online Translators
 
+<style type="text/css">
+pre code {
+  white-space: pre-wrap;
+}
+</style>
+
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/fanyi?color=green)](https://cran.r-project.org/package=fanyi)
 ![](http://cranlogs.r-pkg.org/badges/grand-total/fanyi?color=green)
 ![](http://cranlogs.r-pkg.org/badges/fanyi?color=green)
@@ -77,6 +83,7 @@ library(fanyi)
 text <- 'clusterProfiler supports exploring functional characteristics 
     of both coding and non-coding genomics data for thousands of species 
     with up-to-date gene annotation'
+
 translate(text, from='en', to='zh')
 ```
 
@@ -99,49 +106,43 @@ p2 <- translate_ggplot(p, axis='y')
 aplot::plot_list(p, p2)
 ```
 
-![](README_files/figure-gfm/ggplot-fanyi-1.png)
+![](README_files/figure-gfm/ggplot-fanyi-1.png)<!-- -->
 
 ``` r
-library(fanyi)
-symbol <- c("LDHB", "CCR7", "CD3D", "CD3E", "LEF1", "NOSIP")
+symbol <- c("CCR7", "CD3E")
 gene <- clusterProfiler::bitr(symbol, 
             fromType = 'SYMBOL', 
             toType = 'ENTREZID', 
             OrgDb = 'org.Hs.eg.db')
+```
 
+    ## 
+
+    ## 'select()' returned 1:1 mapping between keys and columns
+
+``` r
 gene
 ```
 
     ##   SYMBOL ENTREZID
-    ## 1   LDHB     3945
-    ## 2   CCR7     1236
-    ## 3   CD3D      915
-    ## 4   CD3E      916
-    ## 5   LEF1    51176
-    ## 6  NOSIP    51070
+    ## 1   CCR7     1236
+    ## 2   CD3E      916
 
 ``` r
 res <- gene_summary(gene$ENTREZID)
-head(res, 2)
+names(res)
 ```
 
-    ##       uid name                    description
-    ## 3945 3945 LDHB        lactate dehydrogenase B
-    ## 1236 1236 CCR7 C-C motif chemokine receptor 7
-    ##                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     summary
-    ## 3945                                                                                                                                                                             This gene encodes the B subunit of lactate dehydrogenase enzyme, which catalyzes the interconversion of pyruvate and lactate with concomitant interconversion of NADH and NAD+ in a post-glycolysis process. Alternatively spliced transcript variants have been found for this gene. Recent studies have shown that a C-terminally extended isoform is produced by use of an alternative in-frame translation termination codon via a stop codon readthrough mechanism, and that this isoform is localized in the peroxisomes. Mutations in this gene are associated with lactate dehydrogenase B deficiency. Pseudogenes have been identified on chromosomes X, 5 and 13. [provided by RefSeq, Feb 2016]
-    ## 1236 The protein encoded by this gene is a member of the G protein-coupled receptor family. This receptor was identified as a gene induced by the Epstein-Barr virus (EBV), and is thought to be a mediator of EBV effects on B lymphocytes. This receptor is expressed in various lymphoid tissues and activates B and T lymphocytes. It has been shown to control the migration of memory T cells to inflamed tissues, as well as stimulate dendritic cell maturation. The chemokine (C-C motif) ligand 19 (CCL19/ECL) has been reported to be a specific ligand of this receptor. Signals mediated by this receptor regulate T cell homeostasis in lymph nodes, and may also function in the activation and polarization of T cells, and in chronic inflammation pathogenesis. Alternative splicing of this gene results in multiple transcript variants. [provided by RefSeq, Sep 2014]
+    ## [1] "uid"         "name"        "description" "summary"
 
 ``` r
 translate(res$description)
 ```
 
-    ## [1] "乳酸脱氢酶B"               "C-C基序趋化因子受体7"     
-    ## [3] "T细胞受体复合体的CD3δ亚基" "T细胞受体复合体的CD3ε亚基"
-    ## [5] "淋巴增强因子结合因子1"     "一氧化氮合酶相互作用蛋白"
+    ## [1] "C-C基序趋化因子受体7"      "T细胞受体复合体的CD3ε亚基"
 
 ``` r
 translate(res$summary[1])
 ```
 
-    ## [1] "该基因编码乳酸脱氢酶的B亚基，该亚基在糖酵解后过程中催化丙酮酸和乳酸的相互转化以及伴随的NADH和NAD+的相互转化。已经发现了该基因的选择性剪接转录物变体。最近的研究表明，通过终止密码子通读机制，通过使用替代的框内翻译终止密码子产生C端延伸的亚型，并且该亚型定位于过氧化物酶体中。该基因的突变与乳酸脱氢酶B缺乏有关。在X、5和13号染色体上已鉴定出假基因。【RefSeq提供，2016年2月】"
+    ## [1] "该基因编码的蛋白质是G蛋白偶联受体家族的成员。该受体被鉴定为EB病毒（EBV）诱导的基因，被认为是EB病毒对B淋巴细胞影响的媒介。这种受体在各种淋巴组织中表达，并激活B和T淋巴细胞。它已被证明可以控制记忆T细胞向炎症组织的迁移，并刺激树突细胞成熟。据报道，趋化因子（C-C基序）配体19（CCL19/ECL）是该受体的特异性配体。该受体介导的信号调节淋巴结中的T细胞稳态，也可能在T细胞的激活和极化以及慢性炎症发病机制中发挥作用。该基因的选择性剪接导致多种转录物变体。【RefSeq提供，2014年9月】"
