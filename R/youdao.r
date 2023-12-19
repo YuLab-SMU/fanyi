@@ -31,17 +31,21 @@ truncate_func <- function(x) {
 .youdao_translate <- function(x, from = 'en', to = 'zh-CHS') {
     query <- youdao_translate_query(x, from = from, to = to)
     url <- URLencode(query)
-    res <- jsonlist::fromJSON(rawToChar(httr::GET(url))$content)
+    res <- jsonlite::fromJSON(rawToChar(httr::GET(url)$content))
     return(res$translation)
 }
 
-youdao_translate_query <- function(x, from = 'en', to = 'zh-CHS') {
+youdao_translate_query <- function(x, from = 'en', to = 'zh-CHS', appid, key) {
     salt <- as.character(trunc(as.numeric(Sys.time()) * 1e3))
     curtime <- as.character(trunc(as.numeric(Sys.time())))
-    encode_str <- paste0(appid = appid, truncate_func(x), salt, curtime, key = key)
-    signed_str <- as.character(sha256(encode_str))
     appid <- get_translate_appkey('youdao')$appid
     key <- get_translate_appkey('youdao')$key
+    encode_str <- paste0(appid = appid, 
+                         truncate_func(x), 
+                         salt, 
+                         curtime, 
+                         key = key)
+    signed_str <- as.character(sha256(encode_str))
     query <- paste0("https://openapi.youdao.com/api?q=", x,
                     "&appKey=", appid, 
                     "&salt=", salt, 
