@@ -109,7 +109,7 @@ aplot::plot_list(p, p2)
 
 
 
-```{r}
+```{r message=FALSE}
 symbol <- c("CCR7", "CD3E")
 gene <- clusterProfiler::bitr(symbol, 
             fromType = 'SYMBOL', 
@@ -117,8 +117,15 @@ gene <- clusterProfiler::bitr(symbol,
             OrgDb = 'org.Hs.eg.db')
 
 gene
+
 res <- gene_summary(gene$ENTREZID)
 names(res)
-translate(res$description)
-translate(res$summary[1])
+d <- data.frame(desc=res$description,
+              desc2=translate(res$description))
+d
+```
+
+```{r message=FALSE, results='asis'}
+cat(res$summary, sep="\n\n")
+cat(translate(res$summary), sep="\n\n")
 ```
