@@ -14,7 +14,8 @@ Description: Useful functions to translate text for multiple languages using onl
 Imports:
   httr,
   jsonlite,
-  openssl
+  openssl,
+  uuid
 ByteCompile: true
 License: Artistic-2.0
 URL: https://github.com/YuLab-SMU/fanyi
