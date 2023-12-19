@@ -1,5 +1,6 @@
-# fanyi 0.0.5.003
+# fanyi 0.0.5.004
 
++ `translate_ggplot()` allows translating axis labels of a ggplot (2023-12-19, Tue)
 + `bing_translate()` supports using bing translate service (2023-12-19, Tue, #1)
 + introduce 'source' parameter in `get_translate_appkey()` (2023-12-17, Sun)
 + `set_translate_option()` supports storing multiple appid and key for different translators (although currently only 'baidu' is supported) (2023-12-16, Sat)

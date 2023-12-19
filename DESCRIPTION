@@ -1,6 +1,6 @@
 Package: fanyi
 Title: Translate Words or Sentences via Online Translators
-Version: 0.0.5.003
+Version: 0.0.5.004
 Authors@R: c(
        person("Guangchuang", "Yu", 
               email = "guangchuangyu@gmail.com", 
@@ -12,6 +12,7 @@ Description: Useful functions to translate text for multiple languages using onl
     For example, by translating error messages and descriptive analysis results into a language familiar
     to the user, it enables a better understanding of the information, thereby reducing the barriers caused by language.
 Imports:
+  ggfun,
   httr,
   jsonlite,
   openssl,

@@ -4,14 +4,14 @@ bing_translate <- function(x, from = 'en', to='zh') {
     vapply(x, .bing_translate, from = from, to = to, FUN.VALUE = character(1))
 }
 
-# set_translate_option(key ="hide", location = 'southeastasia', source = "bing")
+# set_translate_option(key ="hide", region = 'southeastasia', source = "bing")
 # bing_translate("I am superman")   
 
 # set apikey through translate.r/set_translate_option
 .bing_translate <- function(x, from = 'en', to = 'zh') {
     src <- get_translate_appkey('bing')
     api_key <- src$key
-    location <- src$location
+    region <- src$region
 
     endpoint <- 'https://api.cognitive.microsofttranslator.com'
     path <- '/translate'
@@ -25,7 +25,7 @@ bing_translate <- function(x, from = 'en', to='zh') {
 
     headers <- c(
         'Ocp-Apim-Subscription-Key' = api_key,
-        'Ocp-Apim-Subscription-Region' = location,
+        'Ocp-Apim-Subscription-Region' = region,
         'Content-type' = 'application/json',
         'X-ClientTraceId' = as.character(uuid::UUIDgenerate())
     )
@@ -47,3 +47,4 @@ bing_translate <- function(x, from = 'en', to='zh') {
     out <- jsonlite::toJSON(parsed_response, auto_unbox = TRUE, pretty = TRUE)
     return(fromJSON(out[[1]])$translations[[1]]$text)
 }
+
