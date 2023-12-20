@@ -19,13 +19,14 @@ cn2en <- function (x) {
 #' @param key app key
 #' @param source translation engine
 #' @param region this is for bing use only, translation engine location, depends on your Azure service setting
+#' @param user_dict user defined dictionary ID, only used for 'source = "youdao"'
 #' @return No return value, called for side effects
 #' @author Guangchuang Yu 
 #' @export
-set_translate_option <- function(appid, key, region="southeastasia", source = "baidu") {
+set_translate_option <- function(appid, key, source = "baidu", region="southeastasia", user_dict=NULL) {
     source <- match.arg(source, c("baidu", "bing", "youdao"))
     set_translate_source(source)
-    set_translate_appkey(appid, key, region, source)
+    set_translate_appkey(appid, key, source, region, user_dict)
 }
 
 #' set source of online translator service
@@ -41,10 +42,14 @@ set_translate_source <- function(source) {
 }
 
 ##' @importFrom utils modifyList
-set_translate_appkey <- function(appid=NULL , key=NULL, region=NULL, source) {
+set_translate_appkey <- function(appid=NULL , key=NULL, source, region=NULL, user_dict) {
     newkey <- list(appid = appid, key = key)
     if (source == "bing") {
         newkey$region <- region
+    }
+
+    if (source == 'youdao') {
+        newkey$out_id <- user_dict
     }
 
     x <- list()
@@ -92,7 +97,6 @@ get_translate_appkey <- function(source) {
 #' @importFrom yulab.utils use_perl
 #' @export
 translate <- function(x, from = 'en', to = 'zh') {
-    x <- gsub("\\s*\n+\\s*", " ", x, perl = use_perl())
     src <- get_translate_source()
     switch(src,
            baidu = baidu_translate(x, from = from, to = to),
@@ -132,5 +136,15 @@ translate_ggplot <- function(plot, axis = "xy", from="en", to="zh") {
     }
 
     return(plot)
+}
+
+vectorize_translator <- function(x, .fun, from = 'en', to = 'zh') {
+    x <- gsub("\\s*\n+\\s*", " ", x, perl = use_perl())
+    res <- vapply(x, .fun, 
+            from = from, to = to, 
+            FUN.VALUE = character(1)
+        )
+    names(res) <- NULL
+    return(res)
 }
 

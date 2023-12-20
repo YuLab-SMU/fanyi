@@ -30,6 +30,7 @@ gene_summary_ncbi <- function(entrez) {
         .extract_gene_summary(item)
     }) |> do.call(rbind, args = _)
 
+    rownames(res) <- res$name
     return(res)
 }
 

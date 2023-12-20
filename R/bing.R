@@ -1,12 +1,7 @@
 ##' @rdname translate
 ##' @export
 bing_translate <- function(x, from = 'en', to='zh') {
-    res <- vapply(x, .bing_translate, 
-            from = from, to = to, 
-            FUN.VALUE = character(1)
-        )
-    names(res) <- NULL
-    return(res)
+    vectorize_translator(x, .bing_translate, from = from, to = to)
 }
 
 # set_translate_option(key ="hide", region = 'southeastasia', source = "bing")

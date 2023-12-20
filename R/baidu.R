@@ -1,13 +1,9 @@
 ##' @rdname translate
 ##' @export
 baidu_translate <- function(x, from = 'en', to = 'zh') {
-    res <- vapply(x, .baidu_translate, 
-            from = from, to = to, 
-            FUN.VALUE = character(1)
-        )
-    names(res) <- NULL
-    return(res)
+    vectorize_translator(x, .baidu_translate, from = from, to = to)
 }
+
 
 ##' @importFrom jsonlite fromJSON
 ##' @importFrom httr modify_url

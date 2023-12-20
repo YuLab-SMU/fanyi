@@ -4,16 +4,24 @@
 \alias{set_translate_option}
 \title{set_translate_option}
 \usage{
-set_translate_option(appid, key, region = "southeastasia", source = "baidu")
+set_translate_option(
+  appid,
+  key,
+  source = "baidu",
+  region = "southeastasia",
+  user_dict = NULL
+)
 }
 \arguments{
 \item{appid}{appid, "bing translate" will not use this input.}
 
 \item{key}{app key}
 
+\item{source}{translation engine}
+
 \item{region}{this is for bing use only, translation engine location, depends on your Azure service setting}
 
-\item{source}{translation engine}
+\item{user_dict}{user defined dictionary ID, only used for 'source = "youdao"'}
 }
 \value{
 No return value, called for side effects

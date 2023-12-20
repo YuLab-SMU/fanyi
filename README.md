@@ -66,11 +66,17 @@ use `set_translate_source()` to set the default translator using in
 6.  have fun with `translate()`
 
 ### to use `youdao` translate:
-1. go to <https://ai.youdao.com/> and register an account;
-2. click `自然语言翻译服务` and create an app from subsection `文本翻译`;
-3. get your `应用ID` as appid, and `应用秘钥` as key.
-4. voilà, have fun with `translate()`
-5. (to-do) you can also create `术语表` (dictionary for the terms) as a user-defined dictionary and get the dict id to help you get precise translation in certain domain.
+
+1.  go to <https://ai.youdao.com/> and register an account
+2.  click `自然语言翻译服务` and create an app from subsection
+    `文本翻译`
+3.  get your `应用ID` as appid, and `应用秘钥` as key
+4.  set `appid` and `key` with `source = "youdao"` using
+    `set_translate_option()`
+5.  have fun with `translate()`
+6.  (bonus) you can also create `术语表` (dictionary for the terms) as a
+    user-defined dictionary and get the dict id to help you get precise
+    translation in certain domain.
 
 ## :ideograph_advantage: Examples
 
