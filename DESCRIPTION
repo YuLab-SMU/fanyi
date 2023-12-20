@@ -14,6 +14,7 @@ Description: Useful functions to translate text for multiple languages using onl
 Imports:
   ggfun,
   httr,
+  stringr,
   jsonlite,
   openssl,
   rentrez,

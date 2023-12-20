@@ -23,7 +23,7 @@ cn2en <- function (x) {
 #' @author Guangchuang Yu 
 #' @export
 set_translate_option <- function(appid, key, region="southeastasia", source = "baidu") {
-    source <- match.arg(source, c("baidu", "bing"))
+    source <- match.arg(source, c("baidu", "bing", "youdao"))
     set_translate_source(source)
     set_translate_appkey(appid, key, region, source)
 }
@@ -94,10 +94,10 @@ get_translate_appkey <- function(source) {
 translate <- function(x, from = 'en', to = 'zh') {
     x <- gsub("\\s*\n+\\s*", " ", x, perl = use_perl())
     src <- get_translate_source()
-
     switch(src,
            baidu = baidu_translate(x, from = from, to = to),
-           bing = bing_translate(x, from = from, to = to)
+           bing = bing_translate(x, from = from, to = to),
+           youdao = youdao_translate(x, from = from, to = to)
         )
 }
 
