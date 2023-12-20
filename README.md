@@ -33,6 +33,8 @@ Or the development version from github:
 
 ``` r
 ## install.packages("yulab.utils")
+install.packages(devtools)
+devtools::install_github("YuLab-SMU/yulab.utils") (Install yulab.utils > 0.1.1.x)
 yulab.utils::install_zip_gh("YuLab-SMU/fanyi")
 ```
 
@@ -69,8 +71,9 @@ use `set_translate_source()` to set the default translator using in
 1. go to <https://ai.youdao.com/> and register an account;
 2. click `自然语言翻译服务` and create an app from subsection `文本翻译`;
 3. get your `应用ID` as appid, and `应用秘钥` as key.
-4. voilà, have fun with `translate()`
-5. (to-do) you can also create `术语表` (dictionary for the terms) as a user-defined dictionary and get the dict id to help you get precise translation in certain domain.
+4. set `appid` and `key` using `set_translate_option()` 
+5. voilà, have fun with `translate()`
+6. (to-do) you can also create `术语表` (dictionary for the terms) as a user-defined dictionary and get the dict id to help you get precise translation in certain domain.
 
 ## :ideograph_advantage: Examples
 
