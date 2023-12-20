@@ -29,7 +29,9 @@ truncate_func <- function(x) {
     url <- URLencode(query)
     # res <- jsonlite::fromJSON(rawToChar(httr::GET(url)$content))
     res <- jsonlite::fromJSON(url)
-    return(res$translation)
+    ret <- res$translation
+    if (is.null(ret)) ret <- ""
+    return(ret)
 }
 
 #' @importFrom httr modify_url

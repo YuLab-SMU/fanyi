@@ -14,7 +14,9 @@ baidu_translate <- function(x, from = 'en', to = 'zh') {
     url <- url(url, encoding = "utf-8")
     res <- jsonlite::fromJSON(url)
     
-    return(res$trans_result$dst)
+    ret <- res$trans_result$dst
+    if (is.null(ret)) ret <- ""
+    return(ret)
 }
 
 ##' @importFrom openssl md5
