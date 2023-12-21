@@ -1,5 +1,6 @@
-# fanyi 0.0.5.006
+# fanyi 0.0.5.007
 
++ `get_summary()` and translators with cache  (2023-12-21, Thu)
 + `youdao_translate()` supports using youdao translate service (2023-12-20, Wed, #2)
 + `gene_summary()` to query gene summary and `symbol2entrez()` to convert ID, both using NCBI Gene database (2023-12-19, Tue)
 + `translate_ggplot()` allows translating axis labels of a ggplot (2023-12-19, Tue)

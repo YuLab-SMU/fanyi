@@ -36,6 +36,8 @@ set_translate_option <- function(appid, key, source = "baidu", region="southeast
 #' @param source translation engine
 #' @return No return value, called for side effects
 #' @author Guangchuang Yu 
+#' @examples 
+#' set_translate_source("baidu")
 #' @export
 set_translate_source <- function(source) {
     options(yulab_translate_source = source)
@@ -138,9 +140,10 @@ translate_ggplot <- function(plot, axis = "xy", from="en", to="zh") {
     return(plot)
 }
 
+##' @importFrom memoise memoise
 vectorize_translator <- function(x, .fun, from = 'en', to = 'zh') {
     x <- gsub("\\s*\n+\\s*", " ", x, perl = use_perl())
-    res <- vapply(x, .fun, 
+    res <- vapply(x, memoise::memoise(.fun), 
             from = from, to = to, 
             FUN.VALUE = character(1)
         )

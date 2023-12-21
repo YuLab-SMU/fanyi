@@ -15,6 +15,9 @@ No return value, called for side effects
 \description{
 This function allows users to set the default source for \code{translate()} function
 }
+\examples{
+set_translate_source("baidu")
+}
 \author{
 Guangchuang Yu
 }

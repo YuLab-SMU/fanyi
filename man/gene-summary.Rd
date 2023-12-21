@@ -18,6 +18,9 @@ query gene information from NCBI
 \details{
 This function query gene information (including gene name, description and summary) from NCBI Gene database
 }
+\examples{
+gene_summary('1236')
+}
 \author{
 Guangchuang Yu
 }
