@@ -121,9 +121,9 @@ x <- enrichDO(de)
 p <- dotplot(x)
 p2 <- translate_ggplot(p, axis='y')
 p3 <- translate_ggplot(p, axis='y', to='kor')
-p4 <- translate_ggplot(p, axis='y', to='th')
+p4 <- translate_ggplot(p, axis='y', to='ara')
 aplot::plot_list(English = p, Chinese = p2, 
-                Korean = p3, Thai = p4, ncol=2)
+                Korean = p3, Arabic = p4, ncol=2)
 ```
 
 ![](README_files/figure-gfm/ggplot-fanyi-1.png)<!-- -->
