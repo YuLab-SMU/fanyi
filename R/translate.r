@@ -127,6 +127,10 @@ translate_ggplot <- function(plot, axis = "xy", from="en", to="zh") {
         var <- get_aes_var(plot$mapping, axis)
         lab <- get_plot_data(plot, var)[[1]]
         tlab <- translate(lab, from=from, to = to)
+        if (any(duplicated(tlab))) {
+            i <- which(tlab %in% tlab[duplicated(tlab)])
+            tlab[i] <- sprintf("%s (%s)", tlab[i], lab[i])
+        }
         if (is.factor(lab)) {
             names(tlab) <- lab
             tlab <- factor(tlab, levels = tlab[levels(lab)])
