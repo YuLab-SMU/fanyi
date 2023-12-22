@@ -11,7 +11,10 @@ Useful functions to translate text for multiple languages using online
 translators. For example, by translating error messages and descriptive
 analysis results into a language familiar to the user, it enables a
 better understanding of the information, thereby reducing the barriers
-caused by language.
+caused by language. It offers several helper functions to query gene
+information to help interpretation of interested genes (e.g., marker
+genes, differential expression genes), and provides utilities to
+translate ggplot graphics.
 
 ## :writing_hand: Authors
 
@@ -77,6 +80,11 @@ use `set_translate_source()` to set the default translator using in
 6.  (bonus) you can also create `术语表` (dictionary for the terms) as a
     user-defined dictionary and get the dict id to help you get precise
     translation in certain domain.
+
+### helper functions:
+
+- `gene_summary()` allows retrieving gene information from NCBI.
+- `translate_ggplot()` allows translating axis labels of a ggplot graph.
 
 ## :ideograph_advantage: Examples
 

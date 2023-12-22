@@ -79,6 +79,13 @@ use `set_translate_source()` to set the default translator using in `translate()
 5. have fun with `translate()`
 6. (bonus) you can also create `术语表` (dictionary for the terms) as a user-defined dictionary and get the dict id to help you get precise translation in certain domain.
 
+
+### helper functions:
+
++ `gene_summary()` allows retrieving gene information from NCBI.
++ `translate_ggplot()` allows translating axis labels of a ggplot graph.
+
+
 ## :ideograph_advantage: Examples
 
 ```{r include=FALSE}
