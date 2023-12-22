@@ -2,7 +2,7 @@
 
 + fixed #4 issue when multiple words translated into identical target (2023-12-22, Fri)
     - e.g., 'esophageal carcinoma' and 'esophageal cancer' are translated into one identical Chinese word
-    - now the translated word will be labeled with original words to differential
+    - now the translated word will be labeled with original words to differentiate
 + `get_summary()` and translators with cache  (2023-12-21, Thu)
 + `youdao_translate()` supports using youdao translate service (2023-12-20, Wed, #2)
 + `gene_summary()` to query gene summary and `symbol2entrez()` to convert ID, both using NCBI Gene database (2023-12-19, Tue)
