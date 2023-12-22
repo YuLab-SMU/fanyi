@@ -120,7 +120,10 @@ de <- names(geneList)[1:200]
 x <- enrichDO(de)
 p <- dotplot(x)
 p2 <- translate_ggplot(p, axis='y')
-aplot::plot_list(p, p2)
+p3 <- translate_ggplot(p, axis='y', to='kor')
+p4 <- translate_ggplot(p, axis='y', to='th')
+aplot::plot_list(English = p, Chinese = p2, 
+                Korean = p3, Thai = p4, ncol=2)
 ```
 
 ![](README_files/figure-gfm/ggplot-fanyi-1.png)<!-- -->
