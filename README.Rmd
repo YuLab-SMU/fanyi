@@ -22,6 +22,9 @@ html_preview: false
 cat(packageDescription('fanyi')$Description)
 ```
 
+To cite fanyi in publications use:
+
+G Yu. Using fanyi to assist research communities in retrieving and interpreting information. **_bioRxiv_**, 2023. doi: [10.1101/2023.12.21.572729](https://www.biorxiv.org/content/10.1101/2023.12.21.572729).
 
 ## :writing_hand: Authors
 

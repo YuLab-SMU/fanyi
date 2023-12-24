@@ -1,5 +1,7 @@
-# fanyi 0.0.5.008
+# fanyi 0.0.5.009
 
++ add citation info (2023-12-24, Sun)
+    - <https://www.biorxiv.org/content/10.1101/2023.12.21.572729>
 + fixed #4 issue when multiple words translated into identical target (2023-12-22, Fri)
     - e.g., 'esophageal carcinoma' and 'esophageal cancer' are translated into one identical Chinese word
     - now the translated word will be labeled with original words to differentiate
