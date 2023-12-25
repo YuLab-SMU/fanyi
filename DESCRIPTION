@@ -1,6 +1,6 @@
 Package: fanyi
 Title: Translate Words or Sentences via Online Translators
-Version: 0.0.5.010
+Version: 0.0.5.011
 Authors@R: c(
        person("Guangchuang", "Yu", 
               email = "guangchuangyu@gmail.com", 
@@ -14,8 +14,10 @@ Description: Useful functions to translate text for multiple languages using onl
     It offers several helper functions to query gene information to help interpretation of interested genes (e.g., marker genes, differential expression genes),
     and provides utilities to translate ggplot graphics.
 Imports:
+  digest,
   ggfun,
   httr,
+  httr2,
   jsonlite,
   openssl,
   memoise,

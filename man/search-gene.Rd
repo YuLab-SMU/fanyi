@@ -5,14 +5,14 @@
 \alias{search_gene}
 \title{search_gene}
 \usage{
-symbol2entrez(symbols, organism = "Homo sapiens")
+symbol2entrez(x, organism = "Homo sapiens")
 
 search_gene(x, organism = "Homo sapiens")
 }
 \arguments{
-\item{organism}{correpsonding organism of the input terms}
-
 \item{x}{terms to search}
+
+\item{organism}{correpsonding organism of the input terms}
 }
 \value{
 A data frame with TERM and ENTREZ columns

@@ -63,8 +63,8 @@ gene_summary_ncbi <- function(entrez) {
 
 #' @rdname search-gene
 #' @export
-symbol2entrez <- function(symbols, organism = "Homo sapiens") {
-    res <- search_gene(symbols, organism)
+symbol2entrez <- function(x, organism = "Homo sapiens") {
+    res <- search_gene(x, organism)
     colnames(res)[1] <- "SYMBOL"
     return(res)
 }

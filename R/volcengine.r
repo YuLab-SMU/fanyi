@@ -15,7 +15,6 @@ volcengine_translate <- function(x, from = 'en', to = 'zh') {
 ##' @importFrom digest hmac
 ##' @importFrom jsonlite fromJSON
 ##' @importFrom utils URLencode
-
 .volcengine_translate_query <- function(x, from = 'en', to = 'zh') {
     serviceVersion <- '2020-06-01'
     schema <- 'https'
@@ -56,9 +55,10 @@ volcengine_translate <- function(x, from = 'en', to = 'zh') {
         region = credentials[["region"]],
         service = credentials[["service"]]
     )
-    md["credential_scope"] <- paste0(md["date"], "/",
-                                   md["region"], "/",
-                                   md["service"], "/request")
+    md["credential_scope"] <- sprintf("%s/%s/%s/request",
+                                    md["date"], 
+                                    md["region"],
+                                    md["service"])
 
     signed_str <- ''
     md_signed_headers <- ''

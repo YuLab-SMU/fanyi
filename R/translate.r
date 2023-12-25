@@ -24,7 +24,11 @@ cn2en <- function (x) {
 #' @author Guangchuang Yu 
 #' @export
 set_translate_option <- function(appid, key, source = "baidu", region="southeastasia", user_dict=NULL) {
-    source <- match.arg(source, c("baidu", "bing", "youdao", "huoshan"))
+    if (source %in% c("volc", "huoshan", "bytedance")) {
+        source <- "volcengine"
+    }
+
+    source <- match.arg(source, c("baidu", "bing", "youdao", "volcengine"))
     set_translate_source(source)
     set_translate_appkey(appid, key, source, region, user_dict)
 }
