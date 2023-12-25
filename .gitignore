@@ -1,1 +1,20 @@
+# EXCLUDE FILES WITH CERTAIN EXTENSIONS WHEN COMMIT
+# History files
 .Rhistory
+.Rapp.history
+
+# Session data files
+.RData
+.RDataTmp
+
+# User-specific files
+.Ruserdata
+
+# VSCode files
+.vscode/*
+
+# Vim
+*.swp
+
+# macOS
+.DS_Store

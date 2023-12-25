@@ -7,18 +7,12 @@ youdao_translate <- function(x, from = 'en', to = 'zh-CHS') {
     vectorize_translator(x, .youdao_translate, from = from, to = to)
 }
 
-
-truncate_func <- function(x) {
-    len <- nchar(x)
-    if (len <= 20) {
-        return(x)
-    } 
-
-    res <- paste0(substring(x, c(1, len-9), c(10, len)), 
-                    collapse=as.character(len))
-    return(res)
-}
-
+### Use anonymous function to reduce assignment of value and improve readability ###
+truncate_func <- (\(x) ifelse(nchar(x) <= 20, 
+                              return(x), 
+                              return(paste0(substring(x, c(1, nchar(x) - 9), c(10, nchar(x))), 
+                                            collapse = as.character(nchar(x)))))
+                             )
 
 ## @importFrom httr GET
 ##' @importFrom openssl sha256
