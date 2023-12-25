@@ -61,26 +61,36 @@ gene_summary_ncbi <- function(entrez) {
     return(res)
 }
 
-#' convert gene symbol to entrez id
+#' @rdname search-gene
+#' @export
+symbol2entrez <- function(symbols, organism = "Homo sapiens") {
+    res <- search_gene(symbols, organism)
+    colnames(res)[1] <- "SYMBOL"
+    return(res)
+}
+
+#' search genes and return corresponding entrez ids
 #' 
-#' This function query gene symbols from NCBI Gene database and return corresponding entrez gene IDs
-#' @title symbol2entrez
-#' @rdname symbol2entrez
-#' @param symbols gene symbols
-#' @param organism correpsonding organism of the gene symbols
-#' @return A data frame with SYMBOL and ENTREZ columns
+#' This function query genes (e.g., symbols) from NCBI Gene database and return corresponding entrez gene IDs
+#' @title search_gene
+#' @rdname search-gene
+#' @param x terms to search
+#' @param organism correpsonding organism of the input terms
+#' @return A data frame with TERM and ENTREZ columns
 #' @author Guangchuang Yu 
 #' @export
-#' @importFrom rentrez entrez_search
-symbol2entrez <- function(symbols, organism = "Homo sapiens") {
-    q <- sprintf("%s[Gene] AND %s[Organism]", symbols, organism)
-    entrez <- vapply(q, function(query) {
-        ret <- entrez_search(db='gene', term=query, retmax=1)
-        return(ret$ids)
-    }, FUN.VALUE = character(1))
-    res <- data.frame(SYMBOL=symbols, ENTREZ=entrez)
+search_gene <- function(x, organism = "Homo sapiens") {
+    query <- sprintf("%s[Gene] AND %s[Organism]", x, organism)
+    entrez <- vapply(query, memoise(.search_gene), FUN.VALUE = character(1))
+    res <- data.frame(TERM=x, ENTREZ=entrez)
     rownames(res) <- NULL
     return(res)
 }
 
-
+#' @importFrom rentrez entrez_search
+.search_gene <- function(query, retmax = 1) {
+    res <- tryCatch(entrez_search(db='gene', term=query, retmax=retmax),
+                    error = function(e) NULL)
+    if (is.null) return("")
+    return(res$ids)
+}

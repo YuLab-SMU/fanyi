@@ -1,5 +1,6 @@
-# fanyi 0.0.5.009
+# fanyi 0.0.5.010
 
++ `search_gene()` as we believe `symbol2entrez()` is not restricted to search symbols (2023-12-25, Mon)
 + add citation info (2023-12-24, Sun)
     - <https://www.biorxiv.org/content/10.1101/2023.12.21.572729>
 + fixed #4 issue when multiple words translated into identical target (2023-12-22, Fri)
