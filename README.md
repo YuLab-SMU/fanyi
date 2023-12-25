@@ -16,6 +16,12 @@ information to help interpretation of interested genes (e.g., marker
 genes, differential expression genes), and provides utilities to
 translate ggplot graphics.
 
+To cite fanyi in publications use:
+
+G Yu. Using fanyi to assist research communities in retrieving and
+interpreting information. ***bioRxiv***, 2023. doi:
+[10.1101/2023.12.21.572729](https://www.biorxiv.org/content/10.1101/2023.12.21.572729).
+
 ## :writing_hand: Authors
 
 Guangchuang YU
