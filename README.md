@@ -93,8 +93,8 @@ use `set_translate_source()` to set the default translator using in
    select `API访问密钥`
 3. click `新建密钥`
 4. for security concerns, you are highly advised to add a sub-account (新建子用户)
-5. click the subaccount name in `身份管理` - `用户`, and click `permissions` (权限)
-6. in `Global permisions` (全局权限), add the following permission: 
+5. click the sub-account name in `身份管理` - `用户`, and click `permissions` (权限)
+6. in `Global permissions` (全局权限), add the following permission: 
    "TranslateFullAccess"、"I18nTranslateFullAccess"
 7. have fun with `translate()`
 
