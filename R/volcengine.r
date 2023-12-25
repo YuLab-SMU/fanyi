@@ -150,5 +150,8 @@ volcengine_translate <- function(x, from = 'en', to = 'zh') {
                 httr2::req_body_raw(bodyStr) |>
                 httr2::req_method(method) |> httr2::req_perform()
     resp <- response |> httr2::resp_body_json()
-    return(resp$TranslationList[[1]]$Translation)
+
+    ret <- resp$TranslationList[[1]]$Translation
+    if (is.null(ret)) ret <- ""
+    return(ret)
 }

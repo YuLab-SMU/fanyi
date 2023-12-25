@@ -10,6 +10,7 @@ cn2en <- function (x) {
     translate(x, from = 'zh', to = 'en')
 }
 
+
 #' set appid and key of translation engine
 #' 
 #' This function allows users to use their own appid and key
@@ -24,11 +25,8 @@ cn2en <- function (x) {
 #' @author Guangchuang Yu 
 #' @export
 set_translate_option <- function(appid, key, source = "baidu", region="southeastasia", user_dict=NULL) {
-    if (source %in% c("volc", "huoshan", "bytedance")) {
-        source <- "volcengine"
-    }
+    source <- standardize_source(source)
 
-    source <- match.arg(source, c("baidu", "bing", "youdao", "volcengine"))
     set_translate_source(source)
     set_translate_appkey(appid, key, source, region, user_dict)
 }
@@ -44,6 +42,7 @@ set_translate_option <- function(appid, key, source = "baidu", region="southeast
 #' set_translate_source("baidu")
 #' @export
 set_translate_source <- function(source) {
+    source <- standardize_source(source)
     options(yulab_translate_source = source)
 }
 
@@ -108,7 +107,7 @@ translate <- function(x, from = 'en', to = 'zh') {
            baidu   = baidu_translate(x, from = from, to = to),
            bing    = bing_translate(x, from = from, to = to),
            youdao  = youdao_translate(x, from = from, to = to),
-           huoshan = volcengine_translate(x, from = from, to = to)
+           volcengine = volcengine_translate(x, from = from, to = to)
         )
 }
 
@@ -160,3 +159,12 @@ vectorize_translator <- function(x, .fun, from = 'en', to = 'zh') {
     return(res)
 }
 
+standardize_source <- function(source) {
+    if (source %in% c("volc", "huoshan", "bytedance")) {
+        source <- "volcengine"
+    }
+    
+    source <- match.arg(source, c("baidu", "bing", "youdao", "volcengine"))
+
+    return(source)
+}
