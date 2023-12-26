@@ -46,7 +46,6 @@ bing_translate <- function(x, from = 'en', to='zh') {
     parsed_response <- jsonlite::fromJSON(response_content)
     out <- jsonlite::toJSON(parsed_response, auto_unbox = TRUE, pretty = TRUE)
     ret <- fromJSON(out[[1]])$translations[[1]]$text
-    if (is.null(ret)) ret <- ""
-    return(ret)
+    .translate_result(ret)
 }
 

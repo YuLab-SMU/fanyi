@@ -168,3 +168,13 @@ standardize_source <- function(source) {
 
     return(source)
 }
+
+
+.translate_result <- function(res) {
+  if (is.null(res)) {
+    message("No valid result found.\nPlease check your network and credentials (appid and key).\n")
+    return("")
+  }  
+  return(res)
+}
+

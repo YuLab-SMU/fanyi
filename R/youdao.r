@@ -24,8 +24,7 @@ truncate_func <- (\(x) ifelse(nchar(x) <= 20,
     # res <- jsonlite::fromJSON(rawToChar(httr::GET(url)$content))
     res <- jsonlite::fromJSON(url)
     ret <- res$translation
-    if (is.null(ret)) ret <- ""
-    return(ret)
+    .translate_result(ret)
 }
 
 #' @importFrom httr modify_url
