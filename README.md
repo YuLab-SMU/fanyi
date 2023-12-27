@@ -74,7 +74,7 @@ use `set_translate_source()` to set the default translator using in
     `set_translate_option()`
 6.  have fun with `translate()`
 
-### to use `youdao` translate:
+### to use `youdao`(有道智云) translate:
 
 1.  go to <https://ai.youdao.com/> and register an account
 2.  click `自然语言翻译服务` and create an app from subsection
@@ -92,12 +92,10 @@ use `set_translate_source()` to set the default translator using in
 1.  go to <https://www.volcengine.com/> and register an account
 2.  enable `Machine Translation` (`机器翻译`)
 3.  get app key
-
-- click `控制台`
-- click your avatar at the upper-right corner
-- select `API访问密钥`
-- click `新建密钥`
-
+    - click `控制台`
+    - click your avatar at the upper-right corner
+    - select `API访问密钥`
+    - click `新建密钥`
 4.  for security concerns, you are highly advised to add a sub-account
     (新建子用户)
 5.  click the subaccount name in `身份管理` - `用户`, and click
