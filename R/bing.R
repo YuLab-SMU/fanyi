@@ -2,7 +2,7 @@
 ##' @export
 bing_translate <- function(x, from = 'en', to = 'zh') {
     vectorize_translator(x, 
-      .fun = .bing_translate2, 
+      .fun = .bing_translate, 
       from = from, to = to)
 }
 
@@ -56,9 +56,10 @@ bing_translate <- function(x, from = 'en', to = 'zh') {
 
 
 ##' @method get_translate_text bing
+##' @export
 get_translate_text.bing <- function(response) {
     response$translations[[1]]$text
 }
 
-.bing_translate2 <- memoise(.bing_translate)
+# .bing_translate2 <- memoise(.bing_translate)
 

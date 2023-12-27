@@ -81,7 +81,7 @@ symbol2entrez <- function(x, organism = "Homo sapiens") {
 #' @export
 search_gene <- function(x, organism = "Homo sapiens") {
     query <- sprintf("%s[Gene] AND %s[Organism]", x, organism)
-    entrez <- vapply(query, memoise(.search_gene), FUN.VALUE = character(1))
+    entrez <- vapply(query, .search_gene, FUN.VALUE = character(1))
     res <- data.frame(TERM=x, ENTREZ=entrez)
     rownames(res) <- NULL
     return(res)

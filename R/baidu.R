@@ -1,9 +1,12 @@
 ##' @rdname translate
 ##' @export
 baidu_translate <- function(x, from = 'en', to = 'zh') {
-    vectorize_translator(x, 
-      .fun = .baidu_translate2, 
-      from = from, to = to)
+    x <- gsub("\\s*\n+\\s*", " ", as.character(x), perl = use_perl())
+    text <- paste0(x, collapse="\n")
+    #vectorize_translator(x, 
+    #  .fun = .baidu_translate, 
+    #  from = from, to = to)
+    .translate(text, .fun = .baidu_translate, from = from, to = to)
 }
 
 
@@ -21,8 +24,8 @@ baidu_translate <- function(x, from = 'en', to = 'zh') {
     structure(res, class = "baidu")
 }
 
-
-.baidu_translate2 <- memoise(.baidu_translate)
+## @importFrom memoise memoise
+## .baidu_translate2 <- memoise(.baidu_translate)
 
 
 
@@ -43,6 +46,7 @@ baidu_translate_query <- function(x, from, to) {
 
 
 ##' @method get_translate_text baidu
+##' @export
 get_translate_text.baidu <- function(response) {
     response$trans_result$dst
 }

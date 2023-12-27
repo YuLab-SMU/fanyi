@@ -2,13 +2,14 @@
 ##' @export
 volcengine_translate <- function(x, from = 'en', to = 'zh') {
     vectorize_translator(x,
-      .fun = .volcengine_translate_query2, 
+      .fun = .volcengine_translate_query, 
       from = from, to = to)
 }
 
 
 
 ##' @method get_translate_text volcengine
+##' @export
 get_translate_text.volcengine <- function(response) {
   response$TranslationList[[1]]$Translation
 }
@@ -163,5 +164,5 @@ get_translate_text.volcengine <- function(response) {
 }
 
 
-.volcengine_translate_query2 <- memoise(.volcengine_translate_query)
+#.volcengine_translate_query2 <- memoise(.volcengine_translate_query)
 
