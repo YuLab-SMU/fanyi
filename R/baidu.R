@@ -48,7 +48,7 @@ baidu_translate_query <- function(x, from, to) {
 ##' @method get_translate_text baidu
 ##' @export
 get_translate_text.baidu <- function(response) {
-    response$trans_result$dst
+    vapply(response$trans_result, function(x) x$dst, FUN.VALUE=character(1))
 }
 
 

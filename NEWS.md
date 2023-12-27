@@ -1,6 +1,7 @@
 
-# fanyi 0.0.5.013
+# fanyi 0.0.5.014
 
++ 'httr2' migration (2023-12-28, Thu, #11)
 + hold on a second and try again if no result obtained. (2023-12-27, Wed)
 + internal function to query translate text now output as online translator response and use a S3 method `get_translate_text` to extract the translated text 
 + `volcengine_translate()` to support 'huoshan' engine (2023-12-25, Mon, #8)

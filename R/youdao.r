@@ -77,6 +77,6 @@ youdao_translate_query <- function(x, from = 'en', to = 'zh-CHS') {
 ##' @method get_translate_text youdao
 ##' @export
 get_translate_text.youdao <- function(response) {
-    response$translation
+    response$translation[[1]]
 }
 
