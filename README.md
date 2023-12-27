@@ -87,16 +87,24 @@ use `set_translate_source()` to set the default translator using in
     user-defined dictionary and get the dict id to help you get precise
     translation in certain domain.
 
-## to use `huoshan(volcengine)` translate:
-1. go to <https://www.volcengine.com/> and register an account
-2. click `控制台` and click your avatar at the upper-right corner and 
-   select `API访问密钥`
-3. click `新建密钥`
-4. for security concerns, you are highly advised to add a sub-account (新建子用户)
-5. click the sub-account name in `身份管理` - `用户`, and click `permissions` (权限)
-6. in `Global permissions` (全局权限), add the following permissions: 
-   "TranslateFullAccess"、"I18nTranslateFullAccess"
-7. have fun with `translate()`
+## to use `volcengine` (火山引擎) translate:
+
+1.  go to <https://www.volcengine.com/> and register an account
+2.  enable `Machine Translation` (`机器翻译`)
+3.  get app key
+
+- click `控制台`
+- click your avatar at the upper-right corner
+- select `API访问密钥`
+- click `新建密钥`
+
+4.  for security concerns, you are highly advised to add a sub-account
+    (新建子用户)
+5.  click the subaccount name in `身份管理` - `用户`, and click
+    `permissions` (权限)
+6.  in `Global permissions` (全局权限), add the following permissions:
+    “TranslateFullAccess”、“I18nTranslateFullAccess”
+7.  have fun with `translate()`
 
 ### helper functions:
 
