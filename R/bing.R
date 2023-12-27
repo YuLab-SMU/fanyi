@@ -1,8 +1,12 @@
 ##' @rdname translate
 ##' @export
-bing_translate <- function(x, from = 'en', to='zh') {
-    vectorize_translator(x, .bing_translate, from = from, to = to)
+bing_translate <- function(x, from = 'en', to = 'zh') {
+    vectorize_translator(x, 
+      .fun = .bing_translate2, 
+      from = from, to = to)
 }
+
+
 
 # set_translate_option(key ="hide", region = 'southeastasia', source = "bing")
 # bing_translate("I am superman")   
@@ -45,7 +49,16 @@ bing_translate <- function(x, from = 'en', to='zh') {
     response_content <- httr::content(response, "text")
     parsed_response <- jsonlite::fromJSON(response_content)
     out <- jsonlite::toJSON(parsed_response, auto_unbox = TRUE, pretty = TRUE)
-    ret <- fromJSON(out[[1]])$translations[[1]]$text
-    .translate_result(ret)
+    ret <- fromJSON(out[[1]])
+    structure(ret, class = "bing")
 }
+
+
+
+##' @method get_translate_text bing
+get_translate_text.bing <- function(response) {
+    response$translations[[1]]$text
+}
+
+.bing_translate2 <- memoise(.bing_translate)
 

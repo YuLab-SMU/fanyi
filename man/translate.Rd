@@ -23,7 +23,7 @@ translate(x, from = "en", to = "zh")
 
 volcengine_translate(x, from = "en", to = "zh")
 
-youdao_translate(x, from = "en", to = "zh-CHS")
+youdao_translate(x, from = "en", to = "zh")
 }
 \arguments{
 \item{x}{query sentences}

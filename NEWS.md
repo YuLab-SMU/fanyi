@@ -1,5 +1,6 @@
-# fanyi 0.0.5.011
+# fanyi 0.0.5.012
 
++ internal function to query translate text now output as online translator response and use a S3 method `get_translate_text` to extract the translated text 
 + `volcengine_translate()` to support 'huoshan' engine (2023-12-25, Mon, #8)
 + `search_gene()` as we believe `symbol2entrez()` is not restricted to search symbols (2023-12-25, Mon)
 + add citation info (2023-12-24, Sun)

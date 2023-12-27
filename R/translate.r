@@ -151,7 +151,8 @@ translate_ggplot <- function(plot, axis = "xy", from="en", to="zh") {
 ##' @importFrom memoise memoise
 vectorize_translator <- function(x, .fun, from = 'en', to = 'zh') {
     x <- gsub("\\s*\n+\\s*", " ", x, perl = use_perl())
-    res <- vapply(x, memoise::memoise(.fun), 
+    res <- vapply(x, .translate, 
+            .fun = .fun, 
             from = from, to = to, 
             FUN.VALUE = character(1)
         )
@@ -170,11 +171,15 @@ standardize_source <- function(source) {
 }
 
 
-.translate_result <- function(res) {
-  if (is.null(res)) {
-    message("No valid result found.\nPlease check your network and credentials (appid and key).\n")
-    return("")
-  }  
-  return(res)
+.translate <- function(x, .fun, from = 'en', to = 'zh') {
+    resp <- .fun(x, from = from, to = to)
+    res <- get_translate_text(resp)
+
+    if (is.null(res)) {
+      message("No valid result found.\nPlease check your network and credentials (appid and key).\n")
+      return("")
+    }  
+
+    return(res)
 }
 

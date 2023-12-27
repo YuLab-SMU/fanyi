@@ -1,7 +1,9 @@
 ##' @rdname translate
 ##' @export
 baidu_translate <- function(x, from = 'en', to = 'zh') {
-    vectorize_translator(x, .baidu_translate, from = from, to = to)
+    vectorize_translator(x, 
+      .fun = .baidu_translate2, 
+      from = from, to = to)
 }
 
 
@@ -14,9 +16,13 @@ baidu_translate <- function(x, from = 'en', to = 'zh') {
     url <- url(url, encoding = "utf-8")
     res <- jsonlite::fromJSON(url)
     
-    ret <- res$trans_result$dst
-    .translate_result(ret)
+    structure(res, class = "baidu")
 }
+
+
+.baidu_translate2 <- memoise(.baidu_translate)
+
+
 
 ##' @importFrom openssl md5
 baidu_translate_query <- function(x, from, to) {
@@ -32,5 +38,12 @@ baidu_translate_query <- function(x, from, to) {
                 )
     return(.query)
 }
+
+
+##' @method get_translate_text baidu
+get_translate_text.baidu <- function(response) {
+    response$trans_result$dst
+}
+
 
 

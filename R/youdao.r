@@ -3,9 +3,13 @@
 ##' @importFrom jsonlite fromJSON
 ##' @importFrom httr GET
 #Go to https://ai.youdao.com for application of your appid and API key.
-youdao_translate <- function(x, from = 'en', to = 'zh-CHS') {
-    vectorize_translator(x, .youdao_translate, from = from, to = to)
+youdao_translate <- function(x, from = 'en', to = 'zh') {
+    vectorize_translator(x, 
+      .fun = .youdao_translate2, 
+      from = from, to = to)
 }
+
+
 
 ### Use anonymous function to reduce assignment of value and improve readability ###
 truncate_func <- (\(x) ifelse(nchar(x) <= 20, 
@@ -23,9 +27,11 @@ truncate_func <- (\(x) ifelse(nchar(x) <= 20,
     url <- URLencode(query)
     # res <- jsonlite::fromJSON(rawToChar(httr::GET(url)$content))
     res <- jsonlite::fromJSON(url)
-    ret <- res$translation
-    .translate_result(ret)
+    structure(res, class = "youdao")
 }
+
+.youdao_translate2 <- memoise(.youdao_translate)
+
 
 #' @importFrom httr modify_url
 youdao_translate_query <- function(x, from = 'en', to = 'zh-CHS') {
@@ -57,3 +63,9 @@ youdao_translate_query <- function(x, from = 'en', to = 'zh-CHS') {
                 query = query
             )
 }
+
+##' @method get_translate_text youdao
+get_translate_text.youdao <- function(response) {
+    response$translation
+}
+

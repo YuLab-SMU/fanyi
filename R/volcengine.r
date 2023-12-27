@@ -3,7 +3,16 @@
 ##' @importFrom jsonlite fromJSON
 ##' @importFrom httr GET
 volcengine_translate <- function(x, from = 'en', to = 'zh') {
-    vectorize_translator(x, .volcengine_translate_query, from = from, to = to)
+    vectorize_translator(x,
+      .fun = .volcengine_translate_query2, 
+      from = from, to = to)
+}
+
+
+
+##' @method get_translate_text volcengine
+get_translate_text.volcengine <- function(response) {
+  response$TranslationList[[1]]$Translation
 }
 
 ##' @importFrom httr2 request
@@ -151,8 +160,9 @@ volcengine_translate <- function(x, from = 'en', to = 'zh') {
                 httr2::req_method(method) |> httr2::req_perform()
     resp <- response |> httr2::resp_body_json()
 
-    ret <- resp$TranslationList[[1]]$Translation
-    .translate_result(ret)
+    structure(resp, class = "volcengine")
 }
 
+
+.volcengine_translate_query2 <- memoise(.volcengine_translate_query)
 
