@@ -1,7 +1,5 @@
 ##' @rdname translate
 ##' @export
-##' @importFrom jsonlite fromJSON
-##' @importFrom httr GET
 #Go to https://ai.youdao.com for application of your appid and API key.
 youdao_translate <- function(x, from = 'en', to = 'zh') {
     vectorize_translator(x, 
@@ -28,24 +26,27 @@ truncate_func <- function(x) {
 	sprintf("%s%d%s", ps[1], n, ps[2])
 }
 
-## @importFrom httr GET
 ##' @importFrom openssl sha256
 ##' @importFrom jsonlite fromJSON
 ##' @importFrom utils URLencode
+##' @importFrom httr2 request
+##' @importFrom httr2 req_url_query
+##' @importFrom httr2 req_perform
+##' @importFrom httr2 resp_body_json 
+# the native R pipe |> pipes the LHS into the first argument of the function on 
+# the RHS: LHS |> RHS. (https://ivelasq.rbind.io/blog/understanding-the-r-pipe/)
 .youdao_translate <- function(x, from = 'en', to = 'zh-CHS') {
-    query <- youdao_translate_query(x, from = from, to = to)
-    url <- URLencode(query)
-    # res <- jsonlite::fromJSON(rawToChar(httr::GET(url)$content))
-    res <- jsonlite::fromJSON(url)
-
-    structure(res, class = "youdao")
+  url_prefix <- "https://openapi.youdao.com/api?"
+  query <- youdao_translate_query(x, from = from, to = to)
+  req <- httr2::request(url_prefix) |> httr2::req_url_query(!!!query) |> 
+         httr2::req_perform()
+  res <- req |> httr2::resp_body_json()
+  structure(res, class = "youdao")
 }
 
 
 # .youdao_translate2 <- memoise(.youdao_translate)
 
-
-#' @importFrom httr modify_url
 youdao_translate_query <- function(x, from = 'en', to = 'zh-CHS') {
     salt <- as.character(trunc(as.numeric(Sys.time()) * 1e3))
     curtime <- as.character(trunc(as.numeric(Sys.time())))
@@ -66,14 +67,11 @@ youdao_translate_query <- function(x, from = 'en', to = 'zh-CHS') {
                 sign = signed_str, 
                 signType = 'v3',
                 curtime = curtime)
-    
+
     if (!is.null(.info$out_id)) {
         query$vocabId = .info$out_id
     }
-
-    modify_url("https://openapi.youdao.com/api?", 
-                query = query
-            )
+    return(query)
 }
 
 ##' @method get_translate_text youdao
