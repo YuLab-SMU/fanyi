@@ -1,7 +1,5 @@
 ##' @rdname translate
 ##' @export
-##' @importFrom jsonlite fromJSON
-##' @importFrom httr GET
 volcengine_translate <- function(x, from = 'en', to = 'zh') {
     vectorize_translator(x,
       .fun = .volcengine_translate_query2, 
@@ -22,7 +20,8 @@ get_translate_text.volcengine <- function(response) {
 ##' @importFrom httr2 req_perform
 ##' @importFrom openssl sha256
 ##' @importFrom digest hmac
-##' @importFrom jsonlite fromJSON
+##' @importFrom jsonlite toJSON
+##' @importFrom jsonlite unbox
 ##' @importFrom utils URLencode
 .volcengine_translate_query <- function(x, from = 'en', to = 'zh') {
     serviceVersion <- '2020-06-01'

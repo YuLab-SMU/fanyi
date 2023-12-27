@@ -8,14 +8,16 @@ baidu_translate <- function(x, from = 'en', to = 'zh') {
 
 
 ##' @importFrom jsonlite fromJSON
-##' @importFrom httr modify_url
+##' @importFrom httr2 request
+##' @importFrom httr2 req_url_query
+##' @importFrom httr2 req_perform
+##' @importFrom httr2 resp_body_json
 .baidu_translate <- function(x, from = 'en', to = 'zh') {
-    url <- httr::modify_url("http://api.fanyi.baidu.com/api/trans/vip/translate",
-            query = baidu_translate_query(x, from = from, to = to)
-        )
-    url <- url(url, encoding = "utf-8")
-    res <- jsonlite::fromJSON(url)
-    
+    url_prefix <- "http://api.fanyi.baidu.com/api/trans/vip/translate"
+    query <- baidu_translate_query(x, from = from, to = to)
+    req <- httr2::request(url_prefix) |> httr2::req_url_query(!!!query) |>
+           httr2::req_perform()
+    res <- req |> httr2::resp_body_json()
     structure(res, class = "baidu")
 }
 
