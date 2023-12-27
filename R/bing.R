@@ -11,6 +11,12 @@ bing_translate <- function(x, from = 'en', to = 'zh') {
 # set_translate_option(key ="hide", region = 'southeastasia', source = "bing")
 # bing_translate("I am superman")   
 
+##' @importFrom httr2 request
+##' @importFrom httr2 req_headers
+##' @importFrom httr2 req_body_json
+##' @importFrom httr2 req_method
+##' @importFrom httr2 req_perform
+##' @importFrom httr2 resp_body_json
 # set apikey through translate.r/set_translate_option
 .bing_translate <- function(x, from = 'en', to = 'zh') {
     src <- get_translate_appkey('bing')
@@ -40,17 +46,13 @@ bing_translate <- function(x, from = 'en', to = 'zh') {
         )
     )
 
-    response <- httr::POST(url = constructed_url, 
-                        query = params, 
-                        httr::add_headers(.headers = headers), 
-                        body = body, 
-                        encode = "json")
-
-    response_content <- httr::content(response, "text")
-    parsed_response <- jsonlite::fromJSON(response_content)
-    out <- jsonlite::toJSON(parsed_response, auto_unbox = TRUE, pretty = TRUE)
-    ret <- fromJSON(out[[1]])
-    structure(ret, class = "bing")
+    req <- httr2::request(constructed_url) |> httr2::req_url_query(!!!params) |>
+           httr2::req_headers(!!!headers) |> httr2::req_body_json(body) |>
+           httr2::req_perform()
+    res <- req |> httr2::resp_body_json() |> 
+           (\(x) { return(x[[1]]$translations) })() |>
+           (\(y) { return(y[[1]]$text) })()
+    structure(res, class = "bing")
 }
 
 
