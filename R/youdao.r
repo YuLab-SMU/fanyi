@@ -5,18 +5,28 @@
 #Go to https://ai.youdao.com for application of your appid and API key.
 youdao_translate <- function(x, from = 'en', to = 'zh') {
     vectorize_translator(x, 
-      .fun = .youdao_translate2, 
+      .fun = .youdao_translate, 
       from = from, to = to)
 }
 
 
 
 ### Use anonymous function to reduce assignment of value and improve readability ###
-truncate_func <- (\(x) ifelse(nchar(x) <= 20, 
-                              return(x), 
-                              return(paste0(substring(x, c(1, nchar(x) - 9), c(10, nchar(x))), 
-                                            collapse = as.character(nchar(x)))))
-                             )
+# truncate_func <- (\(x) ifelse(nchar(x) <= 20, 
+#                               return(x), 
+#                               return(paste0(substring(x, c(1, nchar(x) - 9), c(10, nchar(x))), 
+#                                             collapse = as.character(nchar(x)))))
+#                             )
+
+truncate_func <- function(x) {
+	x <- as.character(x)
+	n <- nchar(x)
+	if (n <= 20) return(x)
+
+	ps <- substring(x, c(1, n-9), c(10, n))
+
+	sprintf("%s%d%s", ps[1], n, ps[2])
+}
 
 ## @importFrom httr GET
 ##' @importFrom openssl sha256
@@ -27,10 +37,12 @@ truncate_func <- (\(x) ifelse(nchar(x) <= 20,
     url <- URLencode(query)
     # res <- jsonlite::fromJSON(rawToChar(httr::GET(url)$content))
     res <- jsonlite::fromJSON(url)
+
     structure(res, class = "youdao")
 }
 
-.youdao_translate2 <- memoise(.youdao_translate)
+
+# .youdao_translate2 <- memoise(.youdao_translate)
 
 
 #' @importFrom httr modify_url
@@ -65,6 +77,7 @@ youdao_translate_query <- function(x, from = 'en', to = 'zh-CHS') {
 }
 
 ##' @method get_translate_text youdao
+##' @export
 get_translate_text.youdao <- function(response) {
     response$translation
 }

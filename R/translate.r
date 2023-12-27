@@ -148,15 +148,25 @@ translate_ggplot <- function(plot, axis = "xy", from="en", to="zh") {
     return(plot)
 }
 
-##' @importFrom memoise memoise
+
 vectorize_translator <- function(x, .fun, from = 'en', to = 'zh') {
-    x <- gsub("\\s*\n+\\s*", " ", x, perl = use_perl())
-    res <- vapply(x, .translate, 
-            .fun = .fun, 
-            from = from, to = to, 
-            FUN.VALUE = character(1)
-        )
-    names(res) <- NULL
+    # res <- vapply(x, .translate, 
+    #         .fun = .fun, 
+    #         from = from, to = to, 
+    #         FUN.VALUE = character(1)
+    #     )
+    # names(res) <- NULL
+
+    res <- character(length(x))
+    for (i in seq_along(x)) {
+        res[i] <- .translate(x[i], .fun = .fun, from = from, to = to)
+        # Sys.sleep(1) # batch translate may fail and works with Sys.sleep(1)
+    }
+
+    if (all(res == "")) {
+        message("No valid result found.\nPlease check your network and credentials (appid and key).\n")
+    }
+
     return(res)
 }
 
@@ -175,9 +185,16 @@ standardize_source <- function(source) {
     resp <- .fun(x, from = from, to = to)
     res <- get_translate_text(resp)
 
+    cnt <- 1
+    while (is.null(res) && cnt < 5) {
+        Sys.sleep(1)
+        resp <- .fun(x, from = from, to = to)
+        res <- get_translate_text(resp)
+        cnt <- cnt + 1        
+    }
+    
     if (is.null(res)) {
-      message("No valid result found.\nPlease check your network and credentials (appid and key).\n")
-      return("")
+        res <- ""
     }  
 
     return(res)
