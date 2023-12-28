@@ -13,27 +13,25 @@ gene_summary <- function(entrez) {
     gene_summary_ncbi(entrez)
 }
 
-#' @importFrom rentrez entrez_summary
+#' @importFrom yulab.utils get_cache_item
+#' @importFrom yulab.utils update_cache_item
+#' @importFrom yulab.utils get_cache_element
 gene_summary_ncbi <- function(entrez) {
+    .cache <- "NCBI"
     entrez <- as.character(entrez)
-    env <- get_gs_cache()
-    if (!exists("NCBI", envir = env)) {
-        ncbi <- .get_entrez_summary(entrez)
-        assign("NCBI", ncbi, envir = env)
-    } else {
-        ncbi <- get("NCBI", envir = env) 
-        newitem <- entrez[!entrez %in% names(ncbi)]
-        if (length(newitem) > 0) {
-            x <- .get_entrez_summary(newitem)
-            ncbi <- modifyList(ncbi, x)
-        }
-        assign("NCBI", ncbi, envir = env)
+    ncbi <- get_cache_item(.cache)
+    
+    newitem <- entrez[!entrez %in% names(ncbi)]
+    if (length(newitem) > 0) {
+        x <- .get_entrez_summary(newitem)
+        update_cache_item(.cache, x)
     }
-
-    res <- ncbi[entrez]
+    
+    res <- get_cache_element(.cache, entrez)
     .extract_gene_summary(res)
 }
 
+#' @importFrom rentrez entrez_summary
 .get_entrez_summary <- function(entrez) {
     x <- rentrez::entrez_summary(db='gene', id=entrez)
     if (length(entrez) == 1) {

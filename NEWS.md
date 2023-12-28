@@ -1,6 +1,7 @@
 
-# fanyi 0.0.5.015
+# fanyi 0.0.5.016
 
++ update `gene_summary()` to use cache utilities provided by 'yulab.utils'  (2023-12-28, Thu)
 + 'httr2' migration (2023-12-28, Thu, #11, #12)
 + hold on a second and try again if no result obtained. (2023-12-27, Wed)
 + internal function to query translate text now output as online translator response and use a S3 method `get_translate_text` to extract the translated text 
