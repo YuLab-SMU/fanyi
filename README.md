@@ -118,22 +118,35 @@ library(fanyi)
 ## run `set_translate_option()` to setup
 ##
 
-text <- 'clusterProfiler supports exploring functional 
-    characteristics of both coding and non-coding genomics 
-    data for thousands of species with up-to-date gene annotation'
+text <- '我都不知道做人该怎么办，总之报纸写啥就信啥，电视演啥我就看啥。'
 ```
 
 ``` r
-translate(text, from='en', to='zh')
+translate(text, from='zh', to='en')
 ```
 
-> clusterProfiler支持通过最新的基因注释探索数千个物种的编码和非编码基因组学数据的功能特征
+> I don’t even know what to do as a person. In short, I believe whatever
+> is written in the newspaper and watch whatever is shown on TV.
 
 ``` r
-translate(text, from='en', to='jp')
+translate(text, from='zh', to='th')
 ```
 
-> clusterProfilerは、最新の遺伝子注釈による数千種の種の符号化および非符号化ゲノム学データの機能的特徴の探索を支援する
+> ผมไม่รู้ว่าการเป็นมนุษย์ควรทําอย่างไร สรุปแล้วหนังสือพิมพ์เขียนอะไรก็เชื่ออย่างนั้น
+> ทีวีเล่นอะไรก็อ่านอย่างนั้น
+
+``` r
+translate(text, from='zh', to='jp')
+```
+
+> 私は人間としてどうすればいいのか分からないが、とにかく新聞は何を書いても何を信じても、テレビは何を演じても私は何を見てもいい。
+
+``` r
+translate(text, from='zh', to='fra')
+```
+
+> Je ne sais pas quoi faire en tant que personne, je crois ce que les
+> journaux écrivent, je regarde ce que la télévision fait.
 
 ``` r
 library(DOSE)

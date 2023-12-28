@@ -117,25 +117,40 @@ library(fanyi)
 ## run `set_translate_option()` to setup
 ##
 
-text <- 'clusterProfiler supports exploring functional 
-    characteristics of both coding and non-coding genomics 
-    data for thousands of species with up-to-date gene annotation'
+text <- '我都不知道做人该怎么办，总之报纸写啥就信啥，电视演啥我就看啥。'
 ```
 
 ```{r eval=FALSE}
-translate(text, from='en', to='zh')
+translate(text, from='zh', to='en')
 ```
 
 ```{r results='asis', echo=FALSE}
-cat(sprintf(">%s", translate(text, from='en', to='zh')), sep="\n\n")
+cat(sprintf(">%s", translate(text, from='zh', to='en')), sep="\n\n")
 ```
 
 ```{r eval=FALSE}
-translate(text, from='en', to='jp')
+translate(text, from='zh', to='th')
 ```
 
 ```{r results='asis', echo=FALSE}
-cat(sprintf(">%s", translate(text, from='en', to='jp')), sep="\n\n")
+cat(sprintf(">%s", translate(text, from='zh', to='th')), sep="\n\n")
+```
+
+```{r eval=FALSE}
+translate(text, from='zh', to='jp')
+```
+
+```{r results='asis', echo=FALSE}
+cat(sprintf(">%s", translate(text, from='zh', to='jp')), sep="\n\n")
+```
+
+
+```{r eval=FALSE}
+translate(text, from='zh', to='fra')
+```
+
+```{r results='asis', echo=FALSE}
+cat(sprintf(">%s", translate(text, from='zh', to='fra')), sep="\n\n")
 ```
 
 ```{r ggplot-fanyi, fig.width=10, fig.height=9}

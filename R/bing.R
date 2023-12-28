@@ -23,9 +23,7 @@ bing_translate <- function(x, from = 'en', to = 'zh') {
     api_key <- src$key
     region <- src$region
 
-    endpoint <- 'https://api.cognitive.microsofttranslator.com'
-    path <- '/translate'
-    constructed_url <- paste0(endpoint, path)
+    base_url <- 'https://api.cognitive.microsofttranslator.com/translate'
     
     params <- list(
         'api-version' = '3.0',
@@ -46,12 +44,10 @@ bing_translate <- function(x, from = 'en', to = 'zh') {
         )
     )
 
-    req <- httr2::request(constructed_url) |> httr2::req_url_query(!!!params) |>
+    req <- httr2::request(base_url) |> httr2::req_url_query(!!!params) |>
            httr2::req_headers(!!!headers) |> httr2::req_body_json(body) |>
            httr2::req_perform()
-    res <- req |> httr2::resp_body_json() |> 
-           (\(x) { return(x[[1]]$translations) })() |>
-           (\(y) { return(y[[1]]$text) })()
+    res <- req |> httr2::resp_body_json() 
     structure(res, class = "bing")
 }
 
@@ -60,7 +56,10 @@ bing_translate <- function(x, from = 'en', to = 'zh') {
 ##' @method get_translate_text bing
 ##' @export
 get_translate_text.bing <- function(response) {
-    response$translations[[1]]$text
+    # response |> 
+    #     (\(x) { return(x[[1]]$translations) })() |>
+    #     (\(y) { return(y[[1]]$text) })()
+    response[[1]]$translations[[1]]$text
 }
 
 # .bing_translate2 <- memoise(.bing_translate)
