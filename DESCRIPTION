@@ -20,6 +20,7 @@ Imports:
   jsonlite,
   openssl,
   rentrez,
+  rlang,
   utils,
   uuid,
   yulab.utils (> 0.1.2)
