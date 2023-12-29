@@ -100,7 +100,7 @@ use `set_translate_source()` to set the default translator using in `translate()
 
 + `gene_summary()` allows retrieving gene information from NCBI.
 + `translate_ggplot()` allows translating axis labels of a ggplot graph.
-
++ `ydict()` allows query word from youdao dictionary.
 
 ## :ideograph_advantage: Examples
 
@@ -167,7 +167,9 @@ aplot::plot_list(English = p, Chinese = p2,
                 Korean = p3, Arabic = p4, ncol=2)
 ```
 
-
+```{r dict}
+ydict("cell")
+```
 
 ```{r message=FALSE}
 symbol <- c("CCR7", "CD3E")

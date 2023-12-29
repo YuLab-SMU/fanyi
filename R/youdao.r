@@ -41,9 +41,8 @@ truncate_func <- function(x) {
   req <- httr2::request(url_prefix) |> httr2::req_url_query(!!!query) |> 
          httr2::req_perform()
   res <- req |> httr2::resp_body_json()
-  structure(res, class = "youdao")
+  structure(res, class = c("youdao", "list"))
 }
-
 
 # .youdao_translate2 <- memoise(.youdao_translate)
 

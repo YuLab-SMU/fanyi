@@ -108,6 +108,7 @@ use `set_translate_source()` to set the default translator using in
 
 - `gene_summary()` allows retrieving gene information from NCBI.
 - `translate_ggplot()` allows translating axis labels of a ggplot graph.
+- `ydict()` allows query word from youdao dictionary.
 
 ## :ideograph_advantage: Examples
 
@@ -163,6 +164,17 @@ aplot::plot_list(English = p, Chinese = p2,
 ```
 
 ![](README_files/figure-gfm/ggplot-fanyi-1.png)<!-- -->
+
+``` r
+ydict("cell")
+```
+
+    ## 
+    ##  UK: [sel]   US: [sel]
+    ## 
+    ##  Explains: n. 细胞；小牢房；电解槽，电池；电芯；（政治组织的）小组，基层组织；（修道院中的）单人小室；（巢穴中单个的）巢室；（计算机屏幕上的）单元格
+    ## 
+    ##  Web: https://m.youdao.com/m/result?lang=en&word=cell
 
 ``` r
 symbol <- c("CCR7", "CD3E")

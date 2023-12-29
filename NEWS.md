@@ -1,6 +1,7 @@
 
-# fanyi 0.0.5.016
+# fanyi 0.0.5.017
 
++ `ydict()` to support youdao dictionary (2023-12-29, Fri)
 + update `gene_summary()` to use cache utilities provided by 'yulab.utils'  (2023-12-28, Thu)
 + 'httr2' migration (2023-12-28, Thu, #11, #12)
 + hold on a second and try again if no result obtained. (2023-12-27, Wed)
