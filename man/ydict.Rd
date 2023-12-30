@@ -4,10 +4,12 @@
 \alias{ydict}
 \title{ydict}
 \usage{
-ydict(word)
+ydict(word, web = FALSE)
 }
 \arguments{
 \item{word}{word to check}
+
+\item{web}{whether open youdao dict in web browser}
 }
 \value{
 interpretation from youdao dictionary
