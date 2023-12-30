@@ -17,3 +17,15 @@ interpretation from youdao dictionary
 \description{
 check English word in Youdao dictionary
 }
+\examples{
+\dontrun{
+ydict('panda') 
+ydict(tiger) # unquoted word is supported
+
+# if using a word stored in a variable
+#
+x <- 'panda'
+ydict(!!rlang::sym(x))
+
+}
+}

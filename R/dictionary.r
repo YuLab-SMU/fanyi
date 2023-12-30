@@ -7,6 +7,17 @@
 ##' @importFrom rlang as_name
 ##' @importFrom rlang enquo
 ##' @export
+##' @examples
+##' \dontrun{
+##' ydict('panda') 
+##' ydict(tiger) # unquoted word is supported
+##' 
+##' # if using a word stored in a variable
+##' #
+##' x <- 'panda'
+##' ydict(!!rlang::sym(x))
+##' 
+##' }
 ydict <- function(word, web=FALSE) {
     word <- rlang::as_name(rlang::enquo(word))
     x <- .youdao_translate(word) 
