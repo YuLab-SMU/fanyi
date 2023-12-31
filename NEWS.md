@@ -1,6 +1,7 @@
 
-# fanyi 0.0.5.017
+# fanyi 0.0.5.018
 
++ `name2sci()` to convert species common name to scientific name (2023-12-31, Sun)
 + `ydict()` to support youdao dictionary (2023-12-29, Fri)
 + update `gene_summary()` to use cache utilities provided by 'yulab.utils'  (2023-12-28, Thu)
 + 'httr2' migration (2023-12-28, Thu, #11, #12)
