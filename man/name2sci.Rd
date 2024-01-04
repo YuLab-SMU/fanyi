@@ -19,5 +19,7 @@ convert species common name to scientific name
 The function query species common name via the NCBI Taxonomy database and return corresponding scientific name
 }
 \examples{
+\dontrun{
 name2sci("tiger")
+}
 }
