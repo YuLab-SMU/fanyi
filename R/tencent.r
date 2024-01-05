@@ -92,10 +92,10 @@ get_translate_text.tencent <- function(response) {
                                     serialize = F,
                                     raw       = z))
 
-  kdate      <- .hmac(format_date, paste0("TC3", secret), T)
-  kservice   <- .hmac(service, kdate, T)
-  ksigning   <- .hmac("tc3_request", kservice, T)
-  signed_str <- .hmac(stringToSign, ksigning, F)
+  kdate      <- .hmac(format_date,   paste0("TC3", secret), T)
+  kservice   <- .hmac(service,       kdate,                 T)
+  ksigning   <- .hmac("tc3_request", kservice,              T)
+  signed_str <- .hmac(stringToSign,  ksigning,              F)
   
   headers['authorization'] <- paste0(algorithm,
                                      ' ',
@@ -122,5 +122,4 @@ get_translate_text.tencent <- function(response) {
   structure(res, class = "tencent")
 }
 
-#.volcengine_translate_query2 <- memoise(.volcengine_translate_query)
-
+#.tencent_translate_query2 <- memoise(.tencent_translate_query)
