@@ -6,7 +6,9 @@
 ##' @return corresponding scientific names
 ##' @export
 ##' @examples
+##' \dontrun{
 ##' name2sci("tiger")
+##' }
 name2sci <- function(x) {
     y <- vapply(x, name2sci.item, FUN.VALUE=character(1))
 

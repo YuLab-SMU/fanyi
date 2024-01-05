@@ -2,6 +2,7 @@
 
 S3method(get_translate_text,baidu)
 S3method(get_translate_text,bing)
+S3method(get_translate_text,caiyun)
 S3method(get_translate_text,volcengine)
 S3method(get_translate_text,youdao)
 S3method(get_translate_text,caiyun)
