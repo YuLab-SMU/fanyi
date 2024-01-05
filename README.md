@@ -116,6 +116,18 @@ use `set_translate_source()` to set the default translator using in
 5.  caiyun currently supports `from` = {zh(中文), en, ja(日语), auto(自动识别)} 
     and `to` = {en, ja, zh}, default `from` is `auto`
 
+### to use `tencent` (腾讯机器翻译) translate:
+
+1.  go to <https://console.cloud.tencent.com> and register;
+2.  login with your account, go to <https://console.cloud.tencent.com/tmt>
+    to enable machine translation (启用机器翻译);
+3.  go to <https://console.cloud.tencent.com/cam/user/userType>, create a sub-account,
+    in `Permissions` (权限) - `Permissions policy` (权限策略), search and add `QcloudTMTReadOnlyAccess`;
+4.  Get your API keys at `API keys` (API 密钥) of the same page in step 3.
+    set `SecretId` as the `appid` and `SecretKey` as `secrets` respectively with `source = "tencent"` using `set_translate_option()`
+4.  have fun with `translate()`
+5.  for supported languages, visit <https://cloud.tencent.com/document/product/551/15611> for more information.
+
 ### helper functions:
 
 - `gene_summary()` allows retrieving gene information from NCBI.
