@@ -87,7 +87,7 @@ use `set_translate_source()` to set the default translator using in
     user-defined dictionary and get the dict id to help you get precise
     translation in certain domain.
 
-## to use `volcengine` (火山引擎) translate:
+### to use `volcengine` (火山引擎) translate:
 
 1.  go to <https://www.volcengine.com/> and register an account
 2.  enable `Machine Translation` (`机器翻译`)
@@ -109,11 +109,11 @@ use `set_translate_source()` to set the default translator using in
 
 1.  go to <https://platform.caiyunapp.com/login> and register
 2.  login with your account, create a translation app (`创建应用`)
-    choose `翻译` as `接口类型`, and get your token
+    choose `翻译` as `接口类型`
 3.  get the token, set it as the `key` with `source = "caiyun"` using
     `set_translate_option()`
 4.  have fun with `translate()`
-5.  caiyun currently only supports `from` = {zh(中文), en, ja(日语), auto(自动识别)} 
+5.  caiyun currently supports `from` = {zh(中文), en, ja(日语), auto(自动识别)} 
     and `to` = {en, ja, zh}, default `from` is `auto`
 
 ### helper functions:
