@@ -6,9 +6,7 @@ tencent_translate <- function(x, from = 'en', to = 'zh') {
         from = from, to = to)
 }
 
-
-
-##' @method get_translate_text volcengine
+##' @method get_translate_text tencent
 ##' @export
 get_translate_text.tencent <- function(response) {
   response$Response$TargetText

@@ -177,7 +177,12 @@ standardize_source <- function(source) {
         source <- "volcengine"
     }
     
-    source <- match.arg(source, c("baidu", "bing", "youdao", "volcengine", "caiyun"))
+    source <- match.arg(source, c("baidu", 
+                                  "bing", 
+                                  "youdao", 
+                                  "volcengine", 
+                                  "caiyun",
+                                  "tencent"))
 
     return(source)
 }
