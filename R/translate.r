@@ -107,8 +107,9 @@ translate <- function(x, from = 'en', to = 'zh') {
            baidu   = baidu_translate(x, from = from, to = to),
            bing    = bing_translate(x, from = from, to = to),
            youdao  = youdao_translate(x, from = from, to = to),
-           volcengine = volcengine_translate(x, from = from, to = to)
-           caiyun  = caiyun_translate(x, from = from, to = to)  
+           volcengine = volcengine_translate(x, from = from, to = to),
+           caiyun  = caiyun_translate(x, from = from, to = to),  
+           tencent = tencent_translate(x, from = from, to = to)
         )
 }
 
