@@ -111,16 +111,10 @@ get_translate_text.volcengine <- function(response) {
                                 body_hash)
     hashed_canon_req <- openssl::sha256(canonical_request)
 
-    .hmac <- (\(x, y, z) digest::hmac(object    = x,
-                                      key       = y,
-                                      algo      = "sha256",
-                                      serialize = F,
-                                      raw       = z))
-
-    kdate       <- .hmac(md[['date']],    secret,   T)
-    kregion     <- .hmac(md[['region']],  kdate,    T)
-    kservice    <- .hmac(md[['service']], kregion,  T)
-    signing_key <- .hmac("request",       kservice, T)
+    kdate       <- .hmac(md[['date']],    secret,   TRUE)
+    kregion     <- .hmac(md[['region']],  kdate,    TRUE)
+    kservice    <- .hmac(md[['service']], kregion,  TRUE)
+    signing_key <- .hmac("request",       kservice, TRUE)
 
     signing_str <- paste0(md[['algorithm']], '\n',
                           format_date, '\n',

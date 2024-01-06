@@ -105,7 +105,7 @@ use `set_translate_source()` to set the default translator using in
 7.  set `appid` and `key` with `source = "volcengine"` and
     have fun with `translate()`
 
-### to use `caiyun` translate:
+### to use `caiyun` (彩云小译) translate:
 
 1.  go to <https://platform.caiyunapp.com/login> and register
 2.  login with your account, create a translation app (`创建应用`)

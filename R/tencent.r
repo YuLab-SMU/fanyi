@@ -85,17 +85,10 @@ get_translate_text.tencent <- function(response) {
     'x-tc-region'    = region
   )
 
-  #hmac invoke once, run everywhere #
-  .hmac <- (\(x, y, z) digest::hmac(object    = x,
-                                    key       = y,
-                                    algo      = "sha256",
-                                    serialize = F,
-                                    raw       = z))
-
-  kdate      <- .hmac(format_date,   paste0("TC3", secret), T)
-  kservice   <- .hmac(service,       kdate,                 T)
-  ksigning   <- .hmac("tc3_request", kservice,              T)
-  signed_str <- .hmac(stringToSign,  ksigning,              F)
+  kdate      <- .hmac(format_date,   paste0("TC3", secret), TRUE)
+  kservice   <- .hmac(service,       kdate,                 TRUE)
+  ksigning   <- .hmac("tc3_request", kservice,              TRUE)
+  signed_str <- .hmac(stringToSign,  ksigning,              FALSE)
   
   headers['authorization'] <- paste0(algorithm,
                                      ' ',
