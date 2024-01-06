@@ -108,7 +108,8 @@ translate <- function(x, from = 'en', to = 'zh') {
            bing    = bing_translate(x, from = from, to = to),
            youdao  = youdao_translate(x, from = from, to = to),
            volcengine = volcengine_translate(x, from = from, to = to),
-           caiyun  = caiyun_translate(x, from = from, to = to)  
+           caiyun  = caiyun_translate(x, from = from, to = to),  
+           tencent = tencent_translate(x, from = from, to = to)
         )
 }
 
@@ -176,7 +177,12 @@ standardize_source <- function(source) {
         source <- "volcengine"
     }
     
-    source <- match.arg(source, c("baidu", "bing", "youdao", "volcengine", "caiyun"))
+    source <- match.arg(source, c("baidu", 
+                                  "bing", 
+                                  "youdao", 
+                                  "volcengine", 
+                                  "caiyun",
+                                  "tencent"))
 
     return(source)
 }

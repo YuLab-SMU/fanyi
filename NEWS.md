@@ -1,6 +1,7 @@
 
-# fanyi 0.0.5.019
+# fanyi 0.0.5.020
 
++ `tencent_translate()` to support 'tencent' translation (2024-01-06, Sat, #17)
 + `caiyun_translate()` to support 'caiyun' translation (2024-01-05, Fri, #16)
 + `name2sci()` to convert species common name to scientific name (2023-12-31, Sun)
 + `ydict()` to support youdao dictionary (2023-12-29, Fri)

@@ -98,7 +98,7 @@ get_translate_text.volcengine <- function(response) {
 
     norm_uri <- path
     norm_query <- paste0('Action=TranslateText&Version=', serviceVersion)
-    canoncial_request <- paste0(method,
+    canonical_request <- paste0(method,
                                 '\n',
                                 norm_uri,
                                 '\n',
@@ -109,37 +109,24 @@ get_translate_text.volcengine <- function(response) {
                                 md['signed_headers'],
                                 '\n',
                                 body_hash)
-    hashed_canon_req <- openssl::sha256(canoncial_request)
-    kdate <- digest::hmac(object = md[['date']],
-                          key = secret,
-                          algo = "sha256",
-                          serialize = F,
-                          raw = T)
-    kregion <- digest::hmac(object = md[['region']],
-                            key = kdate,
-                            algo = "sha256",
-                            serialize = F,
-                            raw = T)
-    kservice <- digest::hmac(object = md[['service']],
-                             key = kregion,
-                             algo = "sha256",
-                             serialize = F,
-                             raw = T)
-    signing_key <- digest::hmac(object = "request",
-                                key = kservice,
-                                algo = "sha256",
-                                serialize = F,
-                                raw = T)
+    hashed_canon_req <- openssl::sha256(canonical_request)
+
+    .hmac <- (\(x, y, z) digest::hmac(object    = x,
+                                      key       = y,
+                                      algo      = "sha256",
+                                      serialize = F,
+                                      raw       = z))
+
+    kdate       <- .hmac(md[['date']],    secret,   T)
+    kregion     <- .hmac(md[['region']],  kdate,    T)
+    kservice    <- .hmac(md[['service']], kregion,  T)
+    signing_key <- .hmac("request",       kservice, T)
 
     signing_str <- paste0(md[['algorithm']], '\n',
                           format_date, '\n',
                           md[['credential_scope']], '\n',
                           hashed_canon_req)
-    sign <- digest::hmac(object = signing_str,
-                         key = signing_key,
-                         algo = "sha256",
-                         serialize = F,
-                         raw = F)
+    sign <- .hmac(signing_str, signing_key, F)
   
     headers['Authorization'] <- paste0(md['algorithm'],
                                        ' Credential=',
