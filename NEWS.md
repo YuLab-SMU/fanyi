@@ -1,5 +1,5 @@
 
-# fanyi 0.0.5.020
+# fanyi 0.0.5.021
 
 + `chatglm_translate()` to support 'chatglm' translation (2024-01-07, Sun, #18)
 + `tencent_translate()` to support 'tencent' translation (2024-01-06, Sat, #17)
