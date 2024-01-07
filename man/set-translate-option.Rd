@@ -9,7 +9,8 @@ set_translate_option(
   key,
   source = "baidu",
   region = "southeastasia",
-  user_dict = NULL
+  user_dict = NULL,
+  user_model = "turbo"
 )
 }
 \arguments{
@@ -22,6 +23,8 @@ set_translate_option(
 \item{region}{this is for bing use only, translation engine location, depends on your Azure service setting}
 
 \item{user_dict}{user defined dictionary ID, only used for 'source = "youdao"'}
+
+\item{user_model}{selected model used in for 'source = "chatglm"', one of \code{turbo}, \code{pro}, \code{standard} and \code{lite}}
 }
 \value{
 No return value, called for side effects

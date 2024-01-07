@@ -23,25 +23,19 @@ get_translate_text.chatglm <- function(response) {
 ##' @importFrom SSEparser parse_sse
 ##' @importFrom openssl sha2
 #for help, visit: https://open.bigmodel.cn/dev/api#nosdk
-.chatglm_translate_query <- function(x, from = 'en', to = 'zh', user_model = 'turbo') {
+.chatglm_translate_query <- function(x, from = 'en', to = 'zh') {
   from <- .lang_map(from)
   to   <- .lang_map(to)
   #user_model <- "turbo"
-  get_model <- function(user_model){
-    model_list <- list(
-      "turbo"    = "chatglm_turbo",
-      "pro"      = "chatglm_pro",
-      "standard" = "chatglm_std",
-      "lite"     = "chatglm_lite"
-    )
-    return(model_list[[user_model]])
-  }
+  .key_info <- get_translate_appkey('chatglm')
+  user_model <- .key_info$user_model
+
   url <- paste0("https://open.bigmodel.cn/api/paas/v3/model-api/", 
-                get_model(user_model),
+                user_model,
                 "/", "sse-invoke")
   header <- list("alg" = "HS256",
                  "sign_type" = "SIGN")
-  .token <- unlist(strsplit(get_translate_appkey('chatglm')$key, split= "[.]"))
+  .token <- unlist(strsplit(.key_info$key, split= "[.]"))
   id     <- .token[1]
   secret <- .token[2]
 
@@ -75,7 +69,7 @@ get_translate_text.chatglm <- function(response) {
                                                       "hello", "\n",
                                                       "\"\"\"", sep = " "),
                                     "role"    = "user"),
-                               list("content" = "你好",
+                               list("content" = "\u4f60\u597d", # 你好
                                     "role"    = "assistant"),
                                list("content" = paste("Translate into", 
                                                       to, "\n",
@@ -98,5 +92,5 @@ get_translate_text.chatglm <- function(response) {
       TRUE
     })
   res <- paste(sapply(parser$events, \(x) x[["data"]]), collapse = '')
-  return(res)
+  structure(res, class = "chatglm")
 }

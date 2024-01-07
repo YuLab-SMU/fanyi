@@ -21,6 +21,7 @@ cn2en <- function (x) {
 #' @param source translation engine
 #' @param region this is for bing use only, translation engine location, depends on your Azure service setting
 #' @param user_dict user defined dictionary ID, only used for 'source = "youdao"'
+#' @param user_model selected model used in for 'source = "chatglm"', one of `turbo`, `pro`, `standard` and `lite`
 #' @return No return value, called for side effects
 #' @author Guangchuang Yu 
 #' @export
@@ -31,8 +32,8 @@ set_translate_option <- function(appid, key,
                                  user_model = 'turbo') {
     source <- standardize_source(source)
 
-    set_translate_source(source, user_model)
-    set_translate_appkey(appid, key, source, region, user_dict)
+    set_translate_source(source)
+    set_translate_appkey(appid, key, source, region, user_dict, user_model)
 }
 
 #' set source of online translator service
@@ -51,7 +52,9 @@ set_translate_source <- function(source) {
 }
 
 ##' @importFrom utils modifyList
-set_translate_appkey <- function(appid=NULL , key=NULL, source, region=NULL, user_dict) {
+set_translate_appkey <- function(appid=NULL , key=NULL, source, 
+                            region=NULL, user_dict, user_model = 'turbo') {
+
     newkey <- list(appid = appid, key = key)
     if (source == "bing") {
         newkey$region <- region
@@ -59,6 +62,16 @@ set_translate_appkey <- function(appid=NULL , key=NULL, source, region=NULL, use
 
     if (source == 'youdao') {
         newkey$out_id <- user_dict
+    }
+
+    if (source == "chatglm") {
+        user_model <- switch(user_model,
+            "turbo"    = "chatglm_turbo",
+            "pro"      = "chatglm_pro",
+            "standard" = "chatglm_std",
+            "lite"     = "chatglm_lite"           
+            )
+        newkey$user_model <- user_model
     }
 
     x <- list()
