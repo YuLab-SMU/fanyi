@@ -41,7 +41,7 @@ get_translate_text.chatglm <- function(response) {
                 "/", "sse-invoke")
   header <- list("alg" = "HS256",
                  "sign_type" = "SIGN")
-  .token <- unlist(strsplit(get_translate_appkey('chatglm'), split= "[.]"))
+  .token <- unlist(strsplit(get_translate_appkey('chatglm')$key, split= "[.]"))
   id     <- .token[1]
   secret <- .token[2]
 

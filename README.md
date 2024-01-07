@@ -132,7 +132,7 @@ use `set_translate_source()` to set the default translator using in
 
 1.  go to <https://open.bigmodel.cn> and register;
 2.  login with your account, go to <https://open.bigmodel.cn/usercenter/apikeys> to get your API key;
-3.  set the one-line API key as `secrets` with `source = "chatglm"` using `set_translate_option()`
+3.  set the one-line API key as `key` (no need for setting `appid`) with `source = "chatglm"` using `set_translate_option()`
 4.  have fun with `translate()`
 
 ### helper functions:
