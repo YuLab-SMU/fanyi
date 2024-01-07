@@ -24,10 +24,14 @@ cn2en <- function (x) {
 #' @return No return value, called for side effects
 #' @author Guangchuang Yu 
 #' @export
-set_translate_option <- function(appid, key, source = "baidu", region="southeastasia", user_dict=NULL) {
+set_translate_option <- function(appid, key, 
+                                 source = "baidu", 
+                                 region="southeastasia", 
+                                 user_dict=NULL, 
+                                 user_model = 'turbo') {
     source <- standardize_source(source)
 
-    set_translate_source(source)
+    set_translate_source(source, user_model)
     set_translate_appkey(appid, key, source, region, user_dict)
 }
 

@@ -26,7 +26,7 @@ get_translate_text.chatglm <- function(response) {
 .chatglm_translate_query <- function(x, from = 'en', to = 'zh', user_model = 'turbo') {
   from <- .lang_map(from)
   to   <- .lang_map(to)
-  user_model <- "turbo"
+  #user_model <- "turbo"
   get_model <- function(user_model){
     model_list <- list(
       "turbo"    = "chatglm_turbo",
