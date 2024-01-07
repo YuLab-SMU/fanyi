@@ -120,6 +120,15 @@ use `set_translate_source()` to set the default translator using in `translate()
 4.  have fun with `translate()`
 5.  for supported languages, visit <https://cloud.tencent.com/document/product/551/15611> for more information.
 
+### to use `chatglm` (智谱清言[ChatGLM](https://arxiv.org/abs/2210.02414)) translate:
+
+1.  go to <https://open.bigmodel.cn> and register;
+2.  login with your account, go to <https://open.bigmodel.cn/usercenter/apikeys> to get your API key;
+3.  set the one-line API key as `key` (no need for setting `appid`) with `source = "chatglm"` using `set_translate_option()`
+4.  have fun with `translate()`
+5.  you can also set model you prefer to use with the option `user_model` when using `set_translate_option()`,
+    currently `user_model` can be set as `turbo`, `pro`, `standard`, `lite`.
+
 ### helper functions:
 
 + `gene_summary()` allows retrieving gene information from NCBI.

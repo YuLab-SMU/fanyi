@@ -24,10 +24,14 @@ cn2en <- function (x) {
 #' @return No return value, called for side effects
 #' @author Guangchuang Yu 
 #' @export
-set_translate_option <- function(appid, key, source = "baidu", region="southeastasia", user_dict=NULL) {
+set_translate_option <- function(appid, key, 
+                                 source = "baidu", 
+                                 region="southeastasia", 
+                                 user_dict=NULL, 
+                                 user_model = 'turbo') {
     source <- standardize_source(source)
 
-    set_translate_source(source)
+    set_translate_source(source, user_model)
     set_translate_appkey(appid, key, source, region, user_dict)
 }
 
@@ -104,12 +108,13 @@ get_translate_appkey <- function(source) {
 translate <- function(x, from = 'en', to = 'zh') {
     src <- get_translate_source()
     switch(src,
-           baidu   = baidu_translate(x, from = from, to = to),
-           bing    = bing_translate(x, from = from, to = to),
-           youdao  = youdao_translate(x, from = from, to = to),
+           baidu      = baidu_translate(x,      from = from, to = to),
+           bing       = bing_translate(x,       from = from, to = to),
+           youdao     = youdao_translate(x,     from = from, to = to),
            volcengine = volcengine_translate(x, from = from, to = to),
-           caiyun  = caiyun_translate(x, from = from, to = to),  
-           tencent = tencent_translate(x, from = from, to = to)
+           caiyun     = caiyun_translate(x,     from = from, to = to),  
+           tencent    = tencent_translate(x,    from = from, to = to),
+           chatglm    = chatglm_translate(x,    from = from, to = to)
         )
 }
 
@@ -182,7 +187,8 @@ standardize_source <- function(source) {
                                   "youdao", 
                                   "volcengine", 
                                   "caiyun",
-                                  "tencent"))
+                                  "tencent",
+                                  "chatglm"))
 
     return(source)
 }
