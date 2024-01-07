@@ -23,9 +23,7 @@ get_translate_text.chatglm <- function(response) {
 ##' @importFrom SSEparser parse_sse
 ##' @importFrom openssl sha2
 #for help, visit: https://open.bigmodel.cn/dev/api#nosdk
-.chatglm_translate_query <- function(x, from = 'en', to = 'zh') {
-  from <- .lang_map(from)
-  to   <- .lang_map(to)
+.chatglm_query <- function(prompt) {
   #user_model <- "turbo"
   .key_info <- get_translate_appkey('chatglm')
   user_model <- .key_info$user_model
@@ -49,35 +47,20 @@ get_translate_text.chatglm <- function(response) {
                                 chartr('+/', 
                                        '-_', 
                                        openssl::base64_encode(x))))
-  token <- base64url_encode(openssl::sha2(charToRaw(paste(base64url_encode(jsonlite::toJSON(header,  auto_unbox = T)),
-                                                          base64url_encode(jsonlite::toJSON(payload, auto_unbox = T)),
+  token <- base64url_encode(openssl::sha2(charToRaw(paste(base64url_encode(jsonlite::toJSON(header,  auto_unbox = TRUE)),
+                                                          base64url_encode(jsonlite::toJSON(payload, auto_unbox = TRUE)),
                                                           sep = ".")
                                                     ),
                                           key = secret,
                                           size = 256))
   
-  auth_header <- paste(base64url_encode(jsonlite::toJSON(header,  auto_unbox = T)),
-                       base64url_encode(jsonlite::toJSON(payload, auto_unbox = T)),
+  auth_header <- paste(base64url_encode(jsonlite::toJSON(header,  auto_unbox = TRUE)),
+                       base64url_encode(jsonlite::toJSON(payload, auto_unbox = TRUE)),
                        token,
                        sep = ".")
-  body <- list("prompt" = list(list("content" = "You are a professional translation engine, please translate the text into a colloquial, professional, elegant and fluent content, without the style of machine translation. You must only translate the text content, never interpret it.",
-                                    "role"    = "user"),
-                               list("content" = "Ok, I will only translate the text content, never interpret it.",
-                                    "role"    = "assistant"),
-                               list("content" = paste("Translate into", to, "\n", 
-                                                      "\"\"\"", "\n",
-                                                      "hello", "\n",
-                                                      "\"\"\"", sep = " "),
-                                    "role"    = "user"),
-                               list("content" = "\u4f60\u597d", # 你好
-                                    "role"    = "assistant"),
-                               list("content" = paste("Translate into", 
-                                                      to, "\n",
-                                                      "\"\"\"", "\n",
-                                                      x, "\n",
-                                                      "\"\"\"", sep = " "),
-                                    "role"    = "user")))
-  body_json <- jsonlite::toJSON(body, auto_unbox = T)
+
+  body <- list(prompt = prompt)
+  body_json <- jsonlite::toJSON(body, auto_unbox = TRUE)
   headers <- list("Content-Type" = "application/json",
                   "accept"       = "text/event-stream",
                   "Authorization"= auth_header)
@@ -91,6 +74,68 @@ get_translate_text.chatglm <- function(response) {
       parser$parse_sse(event)
       TRUE
     })
-  res <- paste(sapply(parser$events, \(x) x[["data"]]), collapse = '')
+  return(parser)
+}
+
+.chatglm_translate_query <- function(x, from = 'en', to = 'zh') {
+  if (to == 'zh') {
+    sep <- ''
+  } else {
+    sep <- ' '
+  } 
+
+  from <- .lang_map(from)
+  to   <- .lang_map(to)  
+  .prefix <- sprintf("Translate into %s", to)
+  prompt <- .chatglm_prompt_translate(x, prefix = .prefix, role = 'user')
+  parser <- .chatglm_query(prompt)
+  
+  # res <- paste(sapply(parser$events, \(x) x[["data"]]), collapse = '')
+  res <- .get_chatglm_data(parser, sep)
   structure(res, class = "chatglm")
+}
+
+.chatglm_summarize_query <- function(x) {
+  prompt <- .chatglm_prompt_summarize(x, role = 'user')
+  parser <- .chatglm_query(prompt)
+  .get_chatglm_data(parser)
+}
+
+.chatglm_prompt_summarize <- function(x, prefix = "Summarize the sentences", role = 'user') {
+  list(list(content = "You are a text summarizer, you can only summarize the text, never interpret it.",
+            role   = "user"),
+      list(content = 'Ok, I will only summarize the text,never interpret it.',
+          role   = "assistant"),
+      .chatglm_prompt(x, prefix = prefix, role = role)
+  )
+}
+
+
+.chatglm_prompt_translate <- function(x, prefix = NULL, role = 'user') {
+  list(list(content = "You are a professional translation engine, please translate the text into a colloquial, professional, elegant and fluent content, without the style of machine translation. You must only translate the text content, never interpret it.",
+            role    = "user"),
+      list(content = "Ok, I will only translate the text content, never interpret it.",
+            role    = "assistant"),
+      .chatglm_prompt(x, prefix = prefix, role = role)
+  )
+}
+
+.chatglm_prompt <- function(x, prefix=NULL, role = 'user') {
+  if (is.null(prefix)) {
+    content = x
+  } else {
+    content <- sprintf("%s\n\"\"\"%s\"\"\"", prefix, x)
+  }
+
+  list(content = content, role = role)
+}
+
+.get_chatglm_data <- function(parser, sep = ' ') {
+  y <- sapply(parser$events, function(x) {
+    i <- rev(which(names(x) == "data"))[1] ## sometimes there are several items named with 'data', get the last one
+    if (is.na(i)) return("")
+    x[[i]]
+  })
+
+  paste(y, collapse = sep)
 }
