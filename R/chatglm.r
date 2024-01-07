@@ -136,6 +136,6 @@ get_translate_text.chatglm <- function(response) {
     if (is.na(i)) return("")
     x[[i]]
   })
-
+  y <- y[y != ""]
   paste(y, collapse = sep)
 }
