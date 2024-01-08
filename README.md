@@ -102,8 +102,8 @@ use `set_translate_source()` to set the default translator using in
     `permissions` (权限)
 6.  in `Global permissions` (全局权限), add the following permissions:
     “TranslateFullAccess”、“I18nTranslateFullAccess”
-7.  set `appid` and `key` with `source = "volcengine"` and
-    have fun with `translate()`
+7.  set `appid` and `key` with `source = "volcengine"` and have fun with
+    `translate()`
 
 ### to use `caiyun` (彩云小译) translate:
 
@@ -113,29 +113,38 @@ use `set_translate_source()` to set the default translator using in
 3.  get the token, set it as the `key` with `source = "caiyun"` using
     `set_translate_option()`
 4.  have fun with `translate()`
-5.  caiyun currently supports `from` = {zh(中文), en, ja(日语), auto(自动识别)} 
-    and `to` = {en, ja, zh}, default `from` is `auto`
+5.  caiyun currently supports `from` = {zh(中文), en, ja(日语),
+    auto(自动识别)} and `to` = {en, ja, zh}, default `from` is `auto`
 
 ### to use `tencent` (腾讯机器翻译) translate:
 
 1.  go to <https://console.cloud.tencent.com> and register;
-2.  Login with your account, go to <https://console.cloud.tencent.com/tmt>
-    to enable machine translation (启用机器翻译);
-3.  go to <https://console.cloud.tencent.com/cam/user/userType>, create a sub-account,
-    in `Permissions` (权限) - `Permissions policy` (权限策略), search and add `QcloudTMTReadOnlyAccess`;
-4.  get your API keys at `API keys` (API 密钥) of the same page in step 3.
-    Set `SecretId` as the `appid` and `SecretKey` as `secrets` respectively with `source = "tencent"` using `set_translate_option()`
-4.  have fun with `translate()`
-5.  for supported languages, visit <https://cloud.tencent.com/document/product/551/15611> for more information.
+2.  login with your account, go to
+    <https://console.cloud.tencent.com/tmt> to enable machine
+    translation (启用机器翻译);
+3.  go to <https://console.cloud.tencent.com/cam/user/userType>, create
+    a sub-account, in `Permissions` (权限) - `Permissions policy`
+    (权限策略), search and add `QcloudTMTReadOnlyAccess`;
+4.  get your API keys at `API keys` (API 密钥) of the same page in
+    step 3. set `SecretId` as the `appid` and `SecretKey` as `secrets`
+    respectively with `source = "tencent"` using
+    `set_translate_option()`
+5.  have fun with `translate()`
+6.  for supported languages, visit
+    <https://cloud.tencent.com/document/product/551/15611> for more
+    information.
 
-### to use LLM-powered `chatglm` (智谱清言[ChatGLM](https://arxiv.org/abs/2210.02414)) translate:
+### to use `chatglm` (智谱清言[ChatGLM](https://arxiv.org/abs/2210.02414)) translate:
 
 1.  go to <https://open.bigmodel.cn> and register;
-2.  login with your account, go to <https://open.bigmodel.cn/usercenter/apikeys> to get your API key;
-3.  set the one-line API key as `key` (no need for setting `appid`) with `source = "chatglm"` using `set_translate_option()`
+2.  login with your account, go to
+    <https://open.bigmodel.cn/usercenter/apikeys> to get your API key;
+3.  set the one-line API key as `key` (no need for setting `appid`) with
+    `source = "chatglm"` using `set_translate_option()`
 4.  have fun with `translate()`
-5.  you can also set model you prefer to use with the option `user_model` when using `set_translate_option()`,
-    currently `user_model` can be set as `turbo`, `pro`, `standard`, `lite`.
+5.  you can also set model you prefer to use with the option
+    `user_model` when using `set_translate_option()`, currently
+    `user_model` can be set as `turbo`, `pro`, `standard`, `lite`.
 
 ### helper functions:
 

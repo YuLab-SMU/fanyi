@@ -101,7 +101,7 @@ get_translate_appkey <- function(source) {
 
 #' Translate query sentences
 #' 
-#' This function use online translator API (e.g., Baidu fanyi) to translate query sentences
+#' This function use online translator API (one of Baidu, bing, youdao, volcengine, caiyun, tencent and LLM-powered chatglm) to translate query sentences
 #' @title translate
 #' @rdname translate
 #' @param x query sentences
@@ -112,7 +112,7 @@ get_translate_appkey <- function(source) {
 #' library(fanyi)
 #' ## set your appid and key once in your R session
 #' #
-#' # set_translate_option(appid = 'your_appid', key = 'your_key')
+#' # set_translate_option(appid = 'your_appid', key = 'your_key', source = 'which_translation_service')
 #' #
 #' # translate('hello world', from = 'en', to = 'zh')
 #' @author Guangchuang Yu 
