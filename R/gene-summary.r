@@ -7,7 +7,9 @@
 #' @return A data frame containing the information
 #' @author Guangchuang Yu 
 #' @examples 
+#' \dontrun{
 #' gene_summary('1236')
+#' }
 #' @export
 gene_summary <- function(entrez) {
     gene_summary_ncbi(entrez)

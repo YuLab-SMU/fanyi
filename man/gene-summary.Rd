@@ -19,7 +19,9 @@ query gene information from NCBI
 This function query gene information (including gene name, description and summary) from NCBI Gene database
 }
 \examples{
+\dontrun{
 gene_summary('1236')
+}
 }
 \author{
 Guangchuang Yu
