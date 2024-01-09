@@ -3,7 +3,7 @@ citHeader("To cite fanyi in publications use:")
 bibentry(
     bibtype  = "article",
     title  = "Using fanyi to assist research communities in retrieving and interpreting information",
-    author = personList(
+    author = c(
         person("Guangchuang", "Yu")
         ),
     year    = "2023",
