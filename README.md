@@ -49,8 +49,12 @@ yulab.utils::install_zip_gh("YuLab-SMU/fanyi")
 
 ### to switch from different online translators:
 
-use `set_translate_source()` to set the default translator using in
-`translate()`
+You should use `set_translate_source()` to set the default translator
+using in `translate()`.
+
+Alternatively, you can call specific functions to use a specific
+translator, (e.g., `baidu_translate()`, `bing_translate()`,
+`youdao_translate()`, etc.).
 
 ### to use `baidu` translate:
 
@@ -59,7 +63,7 @@ use `set_translate_source()` to set the default translator using in
 2.  get `appid` and `key` (密钥)
 3.  set `appid` and `key` with `source = "baidu"` using
     `set_translate_option()`
-4.  have fun with `translate()`
+4.  have fun with `baidu_translate()`
 
 ### to use `bing` translate:
 
@@ -72,7 +76,7 @@ use `set_translate_source()` to set the default translator using in
 4.  get your `key` and `region`
 5.  set `key` and `region` with `source = "bing"` using
     `set_translate_option()`
-6.  have fun with `translate()`
+6.  have fun with `bing_translate()`
 
 ### to use `youdao`(有道智云) translate:
 
@@ -82,7 +86,7 @@ use `set_translate_source()` to set the default translator using in
 3.  get your `应用ID` as appid, and `应用秘钥` as key
 4.  set `appid` and `key` with `source = "youdao"` using
     `set_translate_option()`
-5.  have fun with `translate()`
+5.  have fun with `youdao_translate()`
 6.  (bonus) you can also create `术语表` (dictionary for the terms) as a
     user-defined dictionary and get the dict id to help you get precise
     translation in certain domain.
@@ -103,7 +107,7 @@ use `set_translate_source()` to set the default translator using in
 6.  in `Global permissions` (全局权限), add the following permissions:
     “TranslateFullAccess”、“I18nTranslateFullAccess”
 7.  set `appid` and `key` with `source = "volcengine"` and have fun with
-    `translate()`
+    `volcengine_translate()`
 
 ### to use `caiyun` (彩云小译) translate:
 
@@ -112,7 +116,7 @@ use `set_translate_source()` to set the default translator using in
     choose `翻译` as `接口类型`
 3.  get the token, set it as the `key` with `source = "caiyun"` using
     `set_translate_option()`
-4.  have fun with `translate()`
+4.  have fun with `caiyun_translate()`
 5.  caiyun currently supports `from` = {zh(中文), en, ja(日语),
     auto(自动识别)} and `to` = {en, ja, zh}, default `from` is `auto`
 
@@ -129,7 +133,7 @@ use `set_translate_source()` to set the default translator using in
     step 3. set `SecretId` as the `appid` and `SecretKey` as `secrets`
     respectively with `source = "tencent"` using
     `set_translate_option()`
-5.  have fun with `translate()`
+5.  have fun with `tencent_translate()`
 6.  for supported languages, visit
     <https://cloud.tencent.com/document/product/551/15611> for more
     information.
@@ -141,7 +145,7 @@ use `set_translate_source()` to set the default translator using in
     <https://open.bigmodel.cn/usercenter/apikeys> to get your API key;
 3.  set the one-line API key as `key` (no need for setting `appid`) with
     `source = "chatglm"` using `set_translate_option()`
-4.  have fun with `translate()`
+4.  have fun with `chatglm_translate()`
 5.  you can also set model you prefer to use with the option
     `user_model` when using `set_translate_option()`, currently
     `user_model` can be set as `turbo`, `pro`, `standard`, `lite`.
