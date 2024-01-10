@@ -292,3 +292,9 @@ translate(res$summary)
 
 > \[2\]
 > 该基因编码的蛋白质是CD3ε多肽，其与CD3γ、-Δ和-ζ以及T细胞受体α/β和γ/Δ异二聚体一起形成T细胞受体-CD3复合物。这种复合物在将抗原识别与几种细胞内信号转导途径偶联方面起着重要作用。编码ε、γ和δ多肽的基因位于11号染色体上的同一簇中。ε多肽在T细胞发育中起着重要作用。这种基因的缺陷会导致免疫缺陷。该基因也与女性易患I型糖尿病有关。【RefSeq提供，2008年7月】
+
+## :book: Documents
+
+- [把R当成你的翻译器](https://mp.weixin.qq.com/s/caHpUOyTqToJn6tqNspIyg)
+- [fanyi支持有道智云，每年立省30万！](https://mp.weixin.qq.com/s/x829_4P7bui_zEbn3GrIyw)
+- [不仅仅是翻译的fanyi包](https://mp.weixin.qq.com/s/E2jBPKs083bKJFX3gitjNg)
