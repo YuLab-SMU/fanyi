@@ -1,3 +1,6 @@
+# fanyi 0.0.6.001
+
++ remove quote marks in `chatglm_translate()` output (2024-01-10, Wed)
 
 # fanyi 0.0.6
 

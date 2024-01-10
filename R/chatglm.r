@@ -137,5 +137,10 @@ get_translate_text.chatglm <- function(response) {
     x[[i]]
   })
   y <- y[y != ""]
-  paste(y, collapse = sep)
+  res <- paste(y, collapse = sep) |>
+    gsub("\\s+([,\\.])", "\\1", x = _) |> # remove empty space preceeding with punctuation marks
+    sub("^\"\\s*", "", x = _) |> # remove quote marks
+    sub("\\s*\"$", "", x = _)
+
+  return(res) 
 }
