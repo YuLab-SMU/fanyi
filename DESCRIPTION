@@ -6,6 +6,10 @@ Authors@R: c(
               email = "guangchuangyu@gmail.com", 
               role = c("aut", "cre", "cph"), 
               comment = c(ORCID = "0000-0002-6485-8781")
+       ),
+       person("Guannan", "Chen", 
+              email = "gnchen@hrbmu.edu.cn", 
+              role = "ctb"
        )
   )
 Description: Useful functions to translate text for multiple languages using online translators. 
