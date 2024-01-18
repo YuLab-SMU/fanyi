@@ -1,5 +1,6 @@
-# fanyi 0.0.6.001
+# fanyi 0.0.6.002
 
++ add version dependency: R >= 4.2.0 and ggfun >= 0.1.3 (2024-01-18, Thu) 
 + remove quote marks in `chatglm_translate()` output (2024-01-10, Wed)
 
 # fanyi 0.0.6
