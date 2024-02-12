@@ -88,16 +88,30 @@ get_translate_source <- function() {
 }
 
 get_translate_appkey <- function(source) {
+    res <- .get_translate_appkey(source)
+    if (is.null(res)) stop("Please set your appid and key via set_translate_option()")
+    return(res)
+}
+
+.get_translate_appkey <- function(source) {
     if (missing(source)) {
         source <- get_translate_source()
     }
     appkeys <- getOption('yulab_translate', list())
     res <- appkeys[[source]]
-    if (is.null(res)) stop("Please set your appid and key via set_translate_option()")
     return(res)
 }
 
-
+#' @title fanyi_has_appkey
+#' @description test whether there has an appkey setting for the specific source
+#' @param source one of the supported translate services
+#' @return logical value
+#' @export
+fanyi_has_appkey <- function(source) {
+    appkey <- .get_translate_appkey(source)
+    if (is.null(appkey)) return(FALSE)
+    return(TRUE)
+}
 
 #' Translate query sentences
 #' 

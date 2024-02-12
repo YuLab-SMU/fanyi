@@ -1,6 +1,6 @@
 Package: fanyi
 Title: Translate Words or Sentences via Online Translators
-Version: 0.0.6.002
+Version: 0.0.6.003
 Authors@R: c(
        person("Guangchuang", "Yu", 
               email = "guangchuangyu@gmail.com", 

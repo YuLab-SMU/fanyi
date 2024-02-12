@@ -1,5 +1,7 @@
 ##' @rdname translate
 ##' @export
+##' @examplesIf fanyi_has_appkey('baidu')
+##' baidu_translate('hello world')
 baidu_translate <- function(x, from = 'en', to = 'zh') {
     x <- gsub("\\s*\n+\\s*", " ", as.character(x), perl = use_perl())
     text <- paste0(x, collapse="\n")

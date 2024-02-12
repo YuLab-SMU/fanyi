@@ -51,6 +51,9 @@ Translate query sentences
 This function use online translator API (one of Baidu, bing, youdao, volcengine, caiyun, tencent and LLM-powered chatglm) to translate query sentences
 }
 \examples{
+\dontshow{if (fanyi_has_appkey('baidu')) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+baidu_translate('hello world')
+\dontshow{\}) # examplesIf}
 library(fanyi)
 ## set your appid and key once in your R session
 #

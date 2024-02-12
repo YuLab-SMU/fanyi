@@ -1,5 +1,7 @@
-# fanyi 0.0.6.002
+# fanyi 0.0.6.003
 
++ `fanyi_has_appkey()` to test whether the appkey has set (2024-02-12, Mon)
+    - can be used in conditional examples
 + add version dependency: R >= 4.2.0 and ggfun >= 0.1.3 (2024-01-18, Thu) 
 + remove quote marks in `chatglm_translate()` output (2024-01-10, Wed)
 
