@@ -27,6 +27,7 @@ get_translate_text.chatglm <- function(response) {
   #user_model <- "turbo"
   .key_info <- get_translate_appkey('chatglm')
   user_model <- .key_info$user_model
+  # Version can be chosen from v3 or v4
   version <- .key_info$version
 
   url <- paste0("https://open.bigmodel.cn/api/paas/", 
