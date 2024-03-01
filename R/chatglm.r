@@ -27,10 +27,14 @@ get_translate_text.chatglm <- function(response) {
   #user_model <- "turbo"
   .key_info <- get_translate_appkey('chatglm')
   user_model <- .key_info$user_model
+  version <- .key_info$version
 
-  url <- paste0("https://open.bigmodel.cn/api/paas/v3/model-api/", 
+  url <- paste0("https://open.bigmodel.cn/api/paas/", 
+		version,
+		"/model-api/", 
                 user_model,
-                "/", "sse-invoke")
+                "/", 
+		"sse-invoke")
   header <- list("alg" = "HS256",
                  "sign_type" = "SIGN")
   .token <- unlist(strsplit(.key_info$key, split= "[.]"))

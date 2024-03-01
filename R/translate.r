@@ -25,15 +25,17 @@ cn2en <- function (x) {
 #' @return No return value, called for side effects
 #' @author Guangchuang Yu 
 #' @export
-set_translate_option <- function(appid, key, 
+set_translate_option <- function(appid, 
+				 key, 
                                  source = "baidu", 
                                  region="southeastasia", 
                                  user_dict=NULL, 
-                                 user_model = 'turbo') {
+                                 user_model = 'turbo',
+				 version = 'v3') {
     source <- standardize_source(source)
 
     set_translate_source(source)
-    set_translate_appkey(appid, key, source, region, user_dict, user_model)
+    set_translate_appkey(appid, key, source, region, user_dict, user_model, version)
 }
 
 #' set source of online translator service
@@ -52,8 +54,13 @@ set_translate_source <- function(source) {
 }
 
 ##' @importFrom utils modifyList
-set_translate_appkey <- function(appid=NULL , key=NULL, source, 
-                            region=NULL, user_dict, user_model = 'turbo') {
+set_translate_appkey <- function(appid=NULL , 
+				 key=NULL, 
+				 source, 
+                                 region=NULL, 
+				 user_dict, 
+				 user_model = 'turbo',
+				 version = 'v3') {
 
     newkey <- list(appid = appid, key = key)
     if (source == "bing") {
@@ -72,6 +79,7 @@ set_translate_appkey <- function(appid=NULL , key=NULL, source,
             "lite"     = "chatglm_lite"           
             )
         newkey$user_model <- user_model
+	newkey$version <- version
     }
 
     x <- list()
