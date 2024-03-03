@@ -130,7 +130,7 @@ translator, (e.g., `baidu_translate()`, `bing_translate()`,
     a sub-account, in `Permissions` (权限) - `Permissions policy`
     (权限策略), search and add `QcloudTMTReadOnlyAccess`;
 4.  get your API keys at `API keys` (API 密钥) of the same page in
-    step 3. set `SecretId` as the `appid` and `SecretKey` as `secrets`
+    step 3. set `SecretId` as the `appid` and `SecretKey` as `key`
     respectively with `source = "tencent"` using
     `set_translate_option()`
 5.  have fun with `tencent_translate()`
@@ -147,8 +147,10 @@ translator, (e.g., `baidu_translate()`, `bing_translate()`,
     `source = "chatglm"` using `set_translate_option()`
 4.  have fun with `chatglm_translate()`
 5.  you can also set model you prefer to use with the option
-    `user_model` when using `set_translate_option()`, currently
-    `user_model` can be set as `turbo`, `pro`, `standard`, `lite`.
+    `user_model` when using `set_translate_option()`, 
+    currently:
+    a. `user_model` can be set as `turbo`, `pro`, `standard`, `lite`;
+    b. `version` can be set as `v3` or `v4`.
 
 ### helper functions:
 
