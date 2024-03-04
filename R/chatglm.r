@@ -73,10 +73,10 @@ get_translate_text.chatglm <- function(response) {
       parser$parse_sse(event)
       TRUE
     })
-  res <- purrr::map(1:(length(parser$events) - 1), function(x) {
-    jsonlite::fromJSON(parser$events[[i]]$data)$choices$delta$content})
+  res_temp <- parser$events
+  res <- purrr::map(1:(length(res_temp) - 1), function(x) {
+    jsonlite::fromJSON(res_temp[[x]]$data)$choices$delta$content}) |> paste(collapse = '')
   return(res)
-  #return(parser)
 }
 
 .chatglm_translate_query <- function(x, from = 'en', to = 'zh') {
