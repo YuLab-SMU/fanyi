@@ -27,7 +27,7 @@ get_translate_text.chatglm <- function(response) {
   .key_info <- get_translate_appkey('chatglm')
   user_model <- .key_info$user_model
 
-  url <- paste0("https://open.bigmodel.cn/api/paas/v4/chat/completions") 
+  url <- "https://open.bigmodel.cn/api/paas/v4/chat/completions"
   header <- list("alg" = "HS256",
                  "sign_type" = "SIGN")
   .token <- unlist(strsplit(.key_info$key, split= "[.]"))
@@ -74,7 +74,7 @@ get_translate_text.chatglm <- function(response) {
       TRUE
     })
   res_temp <- parser$events
-  res <- purrr::map(1:(length(res_temp) - 1), function(x) {
+  res <- purrr::map(seq_len(length(res_temp) - 1), function(x) {
     jsonlite::fromJSON(res_temp[[x]]$data)$choices$delta$content}) |> paste(collapse = '')
   return(res)
 }
