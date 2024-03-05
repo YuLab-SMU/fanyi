@@ -25,11 +25,12 @@ cn2en <- function (x) {
 #' @return No return value, called for side effects
 #' @author Guangchuang Yu 
 #' @export
+# For the possible option of user_model, visit: https://open.bigmodel.cn/dev/api#language
 set_translate_option <- function(appid, key, 
                                  source = "baidu", 
                                  region="southeastasia", 
                                  user_dict=NULL, 
-                                 user_model = 'turbo') {
+                                 user_model = 'glm-4') {
     source <- standardize_source(source)
 
     set_translate_source(source)

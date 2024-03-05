@@ -148,7 +148,7 @@ translator, (e.g., `baidu_translate()`, `bing_translate()`,
 4.  have fun with `chatglm_translate()`
 5.  you can also set model you prefer to use with the option
     `user_model` when using `set_translate_option()`, currently
-    `user_model` can be set as `turbo`, `pro`, `standard`, `lite`.
+    `user_model` can be set as `glm-4` (by default), `glm-4v`, `glm-3-turbo`.
 
 ### helper functions:
 

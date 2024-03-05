@@ -24,13 +24,10 @@ get_translate_text.chatglm <- function(response) {
 ##' @importFrom openssl sha2
 #for help, visit: https://open.bigmodel.cn/dev/api#nosdk
 .chatglm_query <- function(prompt) {
-  #user_model <- "turbo"
   .key_info <- get_translate_appkey('chatglm')
   user_model <- .key_info$user_model
 
-  url <- paste0("https://open.bigmodel.cn/api/paas/v3/model-api/", 
-                user_model,
-                "/", "sse-invoke")
+  url <- "https://open.bigmodel.cn/api/paas/v4/chat/completions"
   header <- list("alg" = "HS256",
                  "sign_type" = "SIGN")
   .token <- unlist(strsplit(.key_info$key, split= "[.]"))
@@ -59,10 +56,12 @@ get_translate_text.chatglm <- function(response) {
                        token,
                        sep = ".")
 
-  body <- list(prompt = prompt)
+  body <- list("messages" = prompt,
+               "model"    = user_model,
+               "stream"   = "true"
+              )
   body_json <- jsonlite::toJSON(body, auto_unbox = TRUE)
   headers <- list("Content-Type" = "application/json",
-                  "accept"       = "text/event-stream",
                   "Authorization"= auth_header)
   
   parser <- SSEparser$new()
@@ -74,7 +73,10 @@ get_translate_text.chatglm <- function(response) {
       parser$parse_sse(event)
       TRUE
     })
-  return(parser)
+  res_temp <- parser$events
+  res <- purrr::map(seq_len(length(res_temp) - 1), function(x) {
+    jsonlite::fromJSON(res_temp[[x]]$data)$choices$delta$content}) |> paste(collapse = '')
+  return(res)
 }
 
 .chatglm_translate_query <- function(x, from = 'en', to = 'zh') {

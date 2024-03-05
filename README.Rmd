@@ -129,7 +129,7 @@ Alternatively, you can call specific functions to use a specific translator, (e.
 3.  set the one-line API key as `key` (no need for setting `appid`) with `source = "chatglm"` using `set_translate_option()`
 4.  have fun with `chatglm_translate()`
 5.  you can also set model you prefer to use with the option `user_model` when using `set_translate_option()`,
-    currently `user_model` can be set as `turbo`, `pro`, `standard`, `lite`.
+    currently `user_model` can be set as `glm-4` (by default), `glm-4v`, `glm-3-turbo`.
 
 ### helper functions:
 
