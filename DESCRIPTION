@@ -10,7 +10,11 @@ Authors@R: c(
        person("Guannan", "Chen", 
               email = "gnchen@hrbmu.edu.cn", 
               role = "ctb"
-       )
+       ),
+       person("Difei", "Wang", 
+              email = "2773997973@qq.com", 
+              role = "ctb"
+       )       
   )
 Description: Useful functions to translate text for multiple languages using online translators. 
     For example, by translating error messages and descriptive analysis results into a language familiar
