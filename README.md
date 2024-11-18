@@ -299,6 +299,7 @@ translate(res$summary)
 
 ## :book: Documents
 
+- [使用Fanyi包减少语言障碍、促进信息交流](https://mp.weixin.qq.com/s/qxUwxv2bb1j9Zm-W9CgfPw)
 - [把R当成你的翻译器](https://mp.weixin.qq.com/s/caHpUOyTqToJn6tqNspIyg)
 - [fanyi支持有道智云，每年立省30万！](https://mp.weixin.qq.com/s/x829_4P7bui_zEbn3GrIyw)
 - [不仅仅是翻译的fanyi包](https://mp.weixin.qq.com/s/E2jBPKs083bKJFX3gitjNg)
