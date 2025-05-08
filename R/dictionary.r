@@ -37,6 +37,7 @@ ydict <- function(word, web=FALSE) {
     if (web && !is.null(url)) {
         utils::browseURL(url)
     }
+    invisible(x)
 }
 
 yd_format_item <- function(format, item) {

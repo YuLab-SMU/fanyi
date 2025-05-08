@@ -6,7 +6,7 @@ qwen_translate <- function(x, from = 'en', to = 'zh') {
                        from = from, to = to)
 }
 
-#' @method get_translate_text llm
+#' @method get_translate_text qwen
 #' @export
 get_translate_text.qwen <- function(response) {
   response

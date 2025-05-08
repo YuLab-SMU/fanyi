@@ -6,7 +6,7 @@ deepseek_translate <- function(x, from = 'en', to = 'zh') {
                        from = from, to = to)
 }
 
-#' @method get_translate_text llm
+#' @method get_translate_text deepseek
 #' @export
 get_translate_text.deepseek <- function(response) {
   response
