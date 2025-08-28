@@ -26,11 +26,12 @@ get_translate_text.qwen <- function(response) {
 .qwen_query <- function(prompt) {
   .key_info <- get_translate_appkey('qwen')
   user_model <- .key_info$user_model
+  api_key <- .key_info$key
 
   url <- "https://dashscope.aliyuncs.com/api/v1/services/aigc/text-generation/generation"
 
   body <- list("input" = prompt,
-               "model"    = user_model,
+               "model"    = user_model
               )
 
   body_json <- jsonlite::toJSON(body, auto_unbox = TRUE)

@@ -7,7 +7,7 @@
 \alias{bing_translate}
 \alias{caiyun_translate}
 \alias{chatglm_translate}
-\alias{deepseek_translate}
+\alias{dsk_translate}
 \alias{qwen_translate}
 \alias{tencent_translate}
 \alias{en2cn}
@@ -25,7 +25,7 @@ caiyun_translate(x, from = "auto", to = "zh")
 
 chatglm_translate(x, from = "en", to = "zh")
 
-deepseek_translate(x, from = "en", to = "zh")
+dsk_translate(x, from = "en", to = "zh")
 
 qwen_translate(x, from = "en", to = "zh")
 

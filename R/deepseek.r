@@ -1,6 +1,6 @@
 ##' @rdname translate
 ##' @export
-deepseek_translate <- function(x, from = 'en', to = 'zh') {
+dsk_translate <- function(x, from = 'en', to = 'zh') {
   vectorize_translator(x,
                        .fun = .deepseek_translate_query,
                        from = from, to = to)
@@ -26,6 +26,7 @@ get_translate_text.deepseek <- function(response) {
 .deepseek_query <- function(prompt) {
   .key_info <- get_translate_appkey('deepseek')
   user_model <- .key_info$user_model
+  api_key <- .key_info$key
 
   url <- "https://api.deepseek.com/chat/completions"
 

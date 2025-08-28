@@ -91,11 +91,11 @@ get_translate_text.chatglm <- function(response) {
   structure(parser, class = "chatglm")
 }
 
-.chatglm_summarize_query <- function(x) {
-  prompt <- .chatglm_prompt_summarize(x, role = 'user')
-  parser <- .chatglm_query(prompt)
-  .get_chatglm_data(parser)
-}
+# .chatglm_summarize_query <- function(x) {
+#   prompt <- .chatglm_prompt_summarize(x, role = 'user')
+#   parser <- .chatglm_query(prompt)
+#   .get_chatglm_data(parser)
+# }
 
 .chatglm_prompt_summarize <- function(x, prefix = "Summarize the sentences", role = 'user') {
   list(list(content = "You are a text summarizer, you can only summarize the text, never interpret it.",
