@@ -1,11 +1,12 @@
-<!-- README.md is generated from README.Rmd. Please edit that file -->
-
 # `fanyi`: Translate Words or Sentences via Online Translators
 
-[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/fanyi?color=green)](https://cran.r-project.org/package=fanyi)
-![](http://cranlogs.r-pkg.org/badges/grand-total/fanyi?color=green)
-![](http://cranlogs.r-pkg.org/badges/fanyi?color=green)
-![](http://cranlogs.r-pkg.org/badges/last-week/fanyi?color=green)
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/fanyi?color=green.png)](https://cran.r-project.org/package=fanyi)
+![](http://cranlogs.r-pkg.org/badges/grand-total/fanyi?color=green.png)
+![](http://cranlogs.r-pkg.org/badges/fanyi?color=green.png)
+![](http://cranlogs.r-pkg.org/badges/last-week/fanyi?color=green.png)
 
 Useful functions to translate text for multiple languages using online
 translators. For example, by translating error messages and descriptive
@@ -65,10 +66,11 @@ translator, (e.g., `baidu_translate()`, `bing_translate()`,
 
 1.  go to <https://fanyi-api.baidu.com/manage/developer> and regist as
     an individual developer
-2.  get `appid` and `key` (密钥)
-3.  set `appid` and `key` with `source = "baidu"` using
+2.  enable `通用文本翻译API` service
+3.  get `appid` and `key` (密钥)
+4.  set `appid` and `key` with `source = "baidu"` using
     `set_translate_option()`
-4.  have fun with `baidu_translate()`
+5.  have fun with `baidu_translate()`
 
 ### to use `bing` translate:
 
@@ -215,16 +217,16 @@ aplot::plot_list(English = p, Chinese = p2,
                 Korean = p3, Arabic = p4, ncol=2)
 ```
 
-![](README_files/figure-gfm/ggplot-fanyi-1.png)<!-- -->
+![](README_files/figure-commonmark/ggplot-fanyi-1.png)
 
 ``` r
 ydict("cell")
 ```
 
-    ## 
-    ##  Explains: 细胞
-    ## 
-    ##  Web: https://m.youdao.com/m/result?lang=en&word=cell
+
+        Explains: 细胞
+
+        Web: https://m.youdao.com/m/result?lang=en&word=cell
 
 ``` r
 symbol <- c("CCR7", "CD3E")
@@ -236,16 +238,16 @@ gene <- clusterProfiler::bitr(symbol,
 gene
 ```
 
-    ##   SYMBOL ENTREZID
-    ## 1   CCR7     1236
-    ## 2   CD3E      916
+      SYMBOL ENTREZID
+    1   CCR7     1236
+    2   CD3E      916
 
 ``` r
 res <- gene_summary(gene$ENTREZID)
 names(res)
 ```
 
-    ## [1] "uid"         "name"        "description" "summary"
+    [1] "uid"         "name"        "description" "summary"    
 
 ``` r
 d <- data.frame(desc=res$description,
@@ -253,9 +255,9 @@ d <- data.frame(desc=res$description,
 d
 ```
 
-    ##                                             desc                   desc2
-    ## 1                 C-C motif chemokine receptor 7    C-C基序趋化因子受体7
-    ## 2 CD3 epsilon subunit of T-cell receptor complex T细胞受体复合物CD3ε亚基
+                                                desc                   desc2
+    1                 C-C motif chemokine receptor 7    C-C基序趋化因子受体7
+    2 CD3 epsilon subunit of T-cell receptor complex T细胞受体复合物CD3ε亚基
 
 ``` r
 res$summary
@@ -299,7 +301,6 @@ translate(res$summary)
 
 ## :book: Documents
 
-- [使用Fanyi包减少语言障碍、促进信息交流](https://mp.weixin.qq.com/s/qxUwxv2bb1j9Zm-W9CgfPw)
 - [把R当成你的翻译器](https://mp.weixin.qq.com/s/caHpUOyTqToJn6tqNspIyg)
 - [fanyi支持有道智云，每年立省30万！](https://mp.weixin.qq.com/s/x829_4P7bui_zEbn3GrIyw)
 - [不仅仅是翻译的fanyi包](https://mp.weixin.qq.com/s/E2jBPKs083bKJFX3gitjNg)

@@ -1,14 +1,10 @@
 ---
-output:
-  md_document:
-    variant: gfm
-html_preview: false
+title: "`fanyi`: Translate Words or Sentences via Online Translators"
+format: gfm
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-
-# `fanyi`: Translate Words or Sentences via Online Translators
 
 
 
@@ -63,9 +59,10 @@ Alternatively, you can call specific functions to use a specific translator, (e.
 ### to use `baidu` translate:
 
 1. go to <https://fanyi-api.baidu.com/manage/developer> and regist as an individual developer
-2. get `appid` and `key` (密钥) 
-3. set  `appid` and `key`  with `source = "baidu"` using `set_translate_option()`
-4. have fun with `baidu_translate()` 
+2. enable `通用文本翻译API` service
+3. get `appid` and `key` (密钥) 
+4. set  `appid` and `key`  with `source = "baidu"` using `set_translate_option()`
+5. have fun with `baidu_translate()` 
 
 ### to use `bing` translate:
 
