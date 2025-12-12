@@ -68,7 +68,7 @@ get_translate_text.deepseek <- function(response) {
   .prefix <- sprintf("Translate into %s", to)
   prompt <- .deepseek_prompt_translate(x, prefix = .prefix, role = 'user')
   message <- list(messages = prompt)
-  parser <- .qwen_query(prompt)
+  parser <- .deepseek_query(prompt)
 
   return(parser)
   # res <- paste(sapply(parser$events, \(x) x[["data"]]), collapse = '')
