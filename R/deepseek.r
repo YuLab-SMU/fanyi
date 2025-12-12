@@ -30,9 +30,9 @@ get_translate_text.deepseek <- function(response) {
 
   url <- "https://api.deepseek.com/chat/completions"
 
-  body <- list("input"  = prompt,
-               "model"  = user_model,
-               "stream" = "true")
+  body <- list("messages" = prompt,
+               "model"    = user_model,
+               "stream"   = TRUE)
 
   body_json <- jsonlite::toJSON(body, auto_unbox = TRUE)
   headers <- list("Content-Type" = "application/json",

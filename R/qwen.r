@@ -2,7 +2,7 @@
 ##' @export
 qwen_translate <- function(x, from = 'en', to = 'zh') {
   vectorize_translator(x,
-                       .fun = .chatglm_translate_query,
+                       .fun = .qwen_translate_query,
                        from = from, to = to)
 }
 
