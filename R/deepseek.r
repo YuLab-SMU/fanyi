@@ -6,7 +6,7 @@ dsk_translate <- function(x, from = 'en', to = 'zh') {
     .fun = .deepseek_translate_query,
     from = from,
     to = to
-  )
+  ) |> gsub(pattern = '^"+|"+$', replacement = '', x = _)
 }
 
 #' @method get_translate_text deepseek
