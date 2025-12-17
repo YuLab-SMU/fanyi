@@ -224,7 +224,6 @@ de <- names(geneList)[1:200]
 x <- enrichDO(de)
 ```
 
-    HDO.sqlite is outdated, download the latest version...
 
 ``` r
 p <- dotplot(x)
