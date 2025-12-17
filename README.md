@@ -3,10 +3,10 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/fanyi?color=green.png)](https://cran.r-project.org/package=fanyi)
-![](http://cranlogs.r-pkg.org/badges/grand-total/fanyi?color=green.png)
-![](http://cranlogs.r-pkg.org/badges/fanyi?color=green.png)
-![](http://cranlogs.r-pkg.org/badges/last-week/fanyi?color=green.png)
+[![](https://www.r-pkg.org/badges/version/fanyi?color=green.png)](https://cran.r-project.org/package=fanyi)
+[![](http://cranlogs.r-pkg.org/badges/grand-total/fanyi?color=green.png)](https://cran.r-project.org/package=fanyi)
+[![](http://cranlogs.r-pkg.org/badges/last-month/fanyi?color=green.png)](https://cran.r-project.org/package=fanyi)
+[![](http://cranlogs.r-pkg.org/badges/last-week/fanyi?color=green.png)](https://cran.r-project.org/package=fanyi)
 
 Useful functions to translate text for multiple languages using online
 translators. For example, by translating error messages and descriptive
@@ -53,18 +53,18 @@ yulab.utils::install_zip_gh("YuLab-SMU/fanyi")
 
 ## :beginner: Usages
 
-### to switch from different online translators:
+### To switch between different online translators:
 
 You should use `set_translate_source()` to set the default translator
-using in `translate()`.
+used in `translate()`.
 
 Alternatively, you can call specific functions to use a specific
-translator, (e.g., `baidu_translate()`, `bing_translate()`,
+translator (e.g., `baidu_translate()`, `bing_translate()`,
 `youdao_translate()`, etc.).
 
-### to use `baidu` translate:
+### To use `baidu` translate:
 
-1.  go to <https://fanyi-api.baidu.com/manage/developer> and regist as
+1.  go to <https://fanyi-api.baidu.com/manage/developer> and register as
     an individual developer
 2.  enable `通用文本翻译API` service
 3.  get `appid` and `key` (密钥)
@@ -72,20 +72,20 @@ translator, (e.g., `baidu_translate()`, `bing_translate()`,
     `set_translate_option()`
 5.  have fun with `baidu_translate()`
 
-### to use `bing` translate:
+### To use `bing` translate:
 
-1.  regist a free azure account
+1.  register a free Azure account
 2.  enable `Azure AI services | Translator` from
     <https://portal.azure.com/>
 3.  create a translation service with free tier pricing version (you
-    need a visa/master card to complete registion and will not be
-    charged until exceed 2 million characters monthly)
+    need a visa/master card to complete registration and will not be
+    charged until you exceed 2 million characters monthly)
 4.  get your `key` and `region`
 5.  set `key` and `region` with `source = "bing"` using
     `set_translate_option()`
 6.  have fun with `bing_translate()`
 
-### to use `youdao`(有道智云) translate:
+### To use `youdao` (有道智云) translate:
 
 1.  go to <https://ai.youdao.com/> and register an account
 2.  click `自然语言翻译服务` and create an app from subsection
@@ -96,9 +96,9 @@ translator, (e.g., `baidu_translate()`, `bing_translate()`,
 5.  have fun with `youdao_translate()`
 6.  (bonus) you can also create `术语表` (dictionary for the terms) as a
     user-defined dictionary and get the dict id to help you get precise
-    translation in certain domain.
+    translation in a certain domain.
 
-### to use `volcengine` (火山引擎) translate:
+### To use `volcengine` (火山引擎) translate:
 
 1.  go to <https://www.volcengine.com/> and register an account
 2.  enable `Machine Translation` (`机器翻译`)
@@ -112,11 +112,11 @@ translator, (e.g., `baidu_translate()`, `bing_translate()`,
 5.  click the subaccount name in `身份管理` - `用户`, and click
     `permissions` (权限)
 6.  in `Global permissions` (全局权限), add the following permissions:
-    “TranslateFullAccess”、“I18nTranslateFullAccess”
-7.  set `appid` and `key` with `source = "volcengine"` and have fun with
-    `volcengine_translate()`
+    “TranslateFullAccess”, “I18nTranslateFullAccess”
+7.  set `appid` and `key` with `source = "volcengine"` using
+    `set_translate_option()` and have fun with `volcengine_translate()`
 
-### to use `caiyun` (彩云小译) translate:
+### To use `caiyun` (彩云小译) translate:
 
 1.  go to <https://platform.caiyunapp.com/login> and register
 2.  login with your account, create a translation app (`创建应用`)
@@ -127,7 +127,7 @@ translator, (e.g., `baidu_translate()`, `bing_translate()`,
 5.  caiyun currently supports `from` = {zh(中文), en, ja(日语),
     auto(自动识别)} and `to` = {en, ja, zh}, default `from` is `auto`
 
-### to use `tencent` (腾讯机器翻译) translate:
+### To use `tencent` (腾讯机器翻译) translate:
 
 1.  go to <https://console.cloud.tencent.com> and register;
 2.  login with your account, go to
@@ -145,24 +145,37 @@ translator, (e.g., `baidu_translate()`, `bing_translate()`,
     <https://cloud.tencent.com/document/product/551/15611> for more
     information.
 
-### to use `chatglm` (智谱清言[ChatGLM](https://arxiv.org/abs/2210.02414)) translate:
+### To use `chatglm` (智谱清言[ChatGLM](https://arxiv.org/abs/2210.02414)) translate:
 
 1.  go to <https://open.bigmodel.cn> and register;
 2.  login with your account, go to
     <https://open.bigmodel.cn/usercenter/apikeys> to get your API key;
-3.  set the one-line API key as `key` (no need for setting `appid`) with
+3.  set the API key as `key` (no need for setting `appid`) with
     `source = "chatglm"` using `set_translate_option()`
 4.  have fun with `chatglm_translate()`
-5.  you can also set model you prefer to use with the option
+5.  you can also set the model you prefer to use with the option
     `user_model` when using `set_translate_option()`, currently
     `user_model` can be set as `glm-4` (by default), `glm-4v`,
     `glm-3-turbo`.
 
-### helper functions:
+### To use `DeepSeek` translate:
 
-- `gene_summary()` allows retrieving gene information from NCBI.
-- `translate_ggplot()` allows translating axis labels of a ggplot graph.
-- `ydict()` allows query word from youdao dictionary.
+1.  go to <https://platform.deepseek.com/> and register;
+2.  login with your account, go to
+    <https://platform.deepseek.com/api_keys> to get your API key;
+3.  set the API key as `key` (no need for setting `appid`) with
+    `source = "dsk"` using `set_translate_option()`
+4.  have fun with `dsk_translate()`
+5.  you can also set the model you prefer to use with the option
+    `user_model` when using `set_translate_option()`, currently
+    `user_model` can be set as `deepseek-chat` (by default),
+    `deepseek-coder`.
+
+### Helper functions:
+
+- `gene_summary()` retrieves gene information from NCBI.
+- `translate_ggplot()` translates axis labels of a ggplot graph.
+- `ydict()` queries words from the Youdao dictionary.
 
 ## :ideograph_advantage: Examples
 
@@ -209,6 +222,11 @@ library(enrichplot)
 data(geneList)
 de <- names(geneList)[1:200]
 x <- enrichDO(de)
+```
+
+    HDO.sqlite is outdated, download the latest version...
+
+``` r
 p <- dotplot(x)
 p2 <- translate_ggplot(p, axis='y')
 p3 <- translate_ggplot(p, axis='y', to='kor')
@@ -301,6 +319,7 @@ translate(res$summary)
 
 ## :book: Documents
 
+- [文章发表：你需要的【翻译】包](https://mp.weixin.qq.com/s/TbiNx4BanQzmodFeJjL80A)
 - [把R当成你的翻译器](https://mp.weixin.qq.com/s/caHpUOyTqToJn6tqNspIyg)
 - [fanyi支持有道智云，每年立省30万！](https://mp.weixin.qq.com/s/x829_4P7bui_zEbn3GrIyw)
 - [不仅仅是翻译的fanyi包](https://mp.weixin.qq.com/s/E2jBPKs083bKJFX3gitjNg)

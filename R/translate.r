@@ -26,7 +26,7 @@ cn2en <- function (x) {
 #' @author Guangchuang Yu 
 #' @export
 # For the possible option of user_model, visit: https://open.bigmodel.cn/dev/api#language
-set_translate_option <- function(appid, key, 
+set_translate_option <- function(appid = NULL, key, 
                                  source = "baidu", 
                                  region="southeastasia", 
                                  user_dict=NULL, 
@@ -226,6 +226,10 @@ vectorize_translator <- function(x, .fun, from = 'en', to = 'zh') {
 standardize_source <- function(source) {
     if (source %in% c("volc", "huoshan", "bytedance")) {
         source <- "volcengine"
+    }
+
+    if (source == "deepseek") {
+        source <- "dsk"
     }
     
     source <- match.arg(source, c("baidu", 

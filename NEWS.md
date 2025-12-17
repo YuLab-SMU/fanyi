@@ -1,3 +1,7 @@
+# fanyi 0.0.9
+
++ support QWen and DeepSeek (2025-12-17, Wed, #39, #47)
+
 # fanyi 0.0.8
 
 + update citation information (2024-08-21, Wed)

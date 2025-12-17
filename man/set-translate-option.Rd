@@ -5,7 +5,7 @@
 \title{set_translate_option}
 \usage{
 set_translate_option(
-  appid,
+  appid = NULL,
   key,
   source = "baidu",
   region = "southeastasia",
