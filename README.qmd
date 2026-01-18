@@ -1,6 +1,8 @@
 ---
 title: "`fanyi`: Translate Words or Sentences via Online Translators"
-format: gfm
+format: 
+  gfm:
+    default-image-extension: ""
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->

@@ -1,3 +1,9 @@
+# fanyi 0.1.0
+
++ `chat_request()` to chat with LLM (DeepSeek, QWen, ChatGLM) (2026-01-18, Sat)
++ update `qwen_translate()` to use standard request instead of SSE (2026-01-18, Sat)
++ polish documentation (2026-01-18, Sat)
+
 # fanyi 0.0.9
 
 + support QWen and DeepSeek (2025-12-17, Wed, #39, #47)

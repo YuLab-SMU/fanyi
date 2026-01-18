@@ -3,10 +3,10 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-[![](https://www.r-pkg.org/badges/version/fanyi?color=green.png)](https://cran.r-project.org/package=fanyi)
-[![](http://cranlogs.r-pkg.org/badges/grand-total/fanyi?color=green.png)](https://cran.r-project.org/package=fanyi)
-[![](http://cranlogs.r-pkg.org/badges/last-month/fanyi?color=green.png)](https://cran.r-project.org/package=fanyi)
-[![](http://cranlogs.r-pkg.org/badges/last-week/fanyi?color=green.png)](https://cran.r-project.org/package=fanyi)
+[![](https://www.r-pkg.org/badges/version/fanyi?color=green)](https://cran.r-project.org/package=fanyi)
+[![](http://cranlogs.r-pkg.org/badges/grand-total/fanyi?color=green)](https://cran.r-project.org/package=fanyi)
+[![](http://cranlogs.r-pkg.org/badges/last-month/fanyi?color=green)](https://cran.r-project.org/package=fanyi)
+[![](http://cranlogs.r-pkg.org/badges/last-week/fanyi?color=green)](https://cran.r-project.org/package=fanyi)
 
 Useful functions to translate text for multiple languages using online
 translators. For example, by translating error messages and descriptive
@@ -222,10 +222,6 @@ library(enrichplot)
 data(geneList)
 de <- names(geneList)[1:200]
 x <- enrichDO(de)
-```
-
-
-``` r
 p <- dotplot(x)
 p2 <- translate_ggplot(p, axis='y')
 p3 <- translate_ggplot(p, axis='y', to='kor')

@@ -55,14 +55,21 @@ get_translate_text.deepseek <- function(response) {
   class(result) <- c("deepseek", class(result))
   return(result)
 }
-.deepseek_query_messages <- function(messages) {
+.deepseek_query_messages <- function(messages, model = NULL, api_key = NULL, max_tokens = 4096, ...) {
   .key_info <- get_translate_appkey('dsk')
-  user_model <- .key_info$user_model
-  api_key <- .key_info$key
-
-  if (is.null(user_model)) {
-    user_model <- "deepseek-chat"
+  
+  if (is.null(model)) {
+    user_model <- .key_info$user_model
+    if (is.null(user_model)) user_model <- "deepseek-chat"
+  } else {
+    user_model <- model
   }
+  
+  if (is.null(api_key)) {
+      api_key <- .key_info$key
+  }
+  
+  if (is.null(api_key)) stop("API key for deepseek is missing.")
 
   url <- "https://api.deepseek.com/v1/chat/completions"
 
@@ -70,7 +77,7 @@ get_translate_text.deepseek <- function(response) {
     model = user_model,
     messages = messages,
     stream = FALSE,
-    max_tokens = 1000
+    max_tokens = max_tokens
   )
 
   response <- httr2::request(url) |>

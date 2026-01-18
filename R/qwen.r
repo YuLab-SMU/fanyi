@@ -23,37 +23,39 @@ get_translate_text.qwen <- function(response) {
 ##' @importFrom SSEparser parse_sse
 ##' @importFrom openssl sha2
 ##' @importFrom purrr map
-.qwen_query <- function(prompt) {
+.qwen_query <- function(prompt, model = NULL, api_key = NULL, max_tokens = 4096, ...) {
   .key_info <- get_translate_appkey('qwen')
-  user_model <- .key_info$user_model
-  api_key <- .key_info$key
+  
+  if (is.null(model)) {
+    user_model <- .key_info$user_model
+    if (is.null(user_model)) user_model <- "qwen-turbo"
+  } else {
+    user_model <- model
+  }
+  
+  if (is.null(api_key)) {
+      api_key <- .key_info$key
+  }
+  
+  if (is.null(api_key)) stop("API key for qwen is missing.")
 
   url <- "https://dashscope.aliyuncs.com/api/v1/services/aigc/text-generation/generation"
-
-  body <- list("input" = prompt,
-               "model"    = user_model
-              )
-
-  body_json <- jsonlite::toJSON(body, auto_unbox = TRUE)
-  headers <- list("Content-Type" = "application/json",
-                  "Authorization"= paste("Bearer",
-                                         api_key,
-                                         sep = " "),
-                  "X-DashScope-SSE" = "enable")
   
-  parser <- SSEparser$new()
+  headers <- c("Content-Type"= "application/json",
+                  "Authorization"= paste("Bearer", api_key))
+  
+  body <- list(input = list(messages = prompt),
+               model = user_model,
+               parameters = list(result_format = "message", max_tokens = max_tokens))
+  body_json <- jsonlite::toJSON(body, auto_unbox = TRUE)
+  
   req <- httr2::request(url) |>
     httr2::req_headers(!!!headers) |>
     httr2::req_body_raw(body_json) |>
-    httr2::req_perform_stream(callback = \(x) {
-      event <- rawToChar(x)
-      parser$parse_sse(event)
-      TRUE
-    })
-  res_temp <- parser$events
-  len <- length(res_temp)
-  res <- jsonlite::fromJSON(res_temp[[len]]$data)$output$text |> noquote()
-  return(res)
+    httr2::req_perform()
+
+  res_temp <- req |> resp_body_json()
+  return(res_temp$output$choices[[1]]$message$content)
 }
 
 .qwen_translate_query <- function(x, from = 'en', to = 'zh') {
