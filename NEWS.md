@@ -1,3 +1,7 @@
+# fanyi 0.1.0.001
+
++ fixed API key passing in `chat_request()` and `.deepseek_query_messages()`: allow passing `api_key` directly without needing to set via `set_translate_option()` (2026-01-26, Mon)
+
 # fanyi 0.1.0
 
 + `chat_request()` to chat with LLM (DeepSeek, QWen, ChatGLM) (2026-01-18, Sat)

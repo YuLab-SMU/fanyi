@@ -56,7 +56,7 @@ get_translate_text.deepseek <- function(response) {
   return(result)
 }
 .deepseek_query_messages <- function(messages, model = NULL, api_key = NULL, max_tokens = 4096, ...) {
-  .key_info <- get_translate_appkey('dsk')
+  .key_info <- .get_translate_appkey('dsk')
   
   if (is.null(model)) {
     user_model <- .key_info$user_model
