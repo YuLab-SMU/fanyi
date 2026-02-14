@@ -26,40 +26,18 @@ get_translate_text.chatglm <- function(response) {
 #for help, visit: https://open.bigmodel.cn/dev/api#nosdk
 .chatglm_query <- function(prompt, model = NULL, api_key = NULL, max_tokens = NULL, ...) {
   .key_info <- get_translate_appkey('chatglm')
-  
-  if (is.null(model)) {
-      # Try to use user_model from settings if available, otherwise default
-      user_model <- if (!is.null(.key_info$user_model)) .key_info$user_model else "glm-4"
-  } else {
-      user_model <- model
-  }
-  
-  # Ensure prompt is in the correct format (list of messages)
-  if (!is.list(prompt) || (is.list(prompt) && length(prompt) > 0 && is.character(prompt[[1]]))) {
-      # If prompt is a character vector or a list of characters (not message objects)
-      
-      # Case 1: prompt is a simple character string -> wrap it
-      if (is.character(prompt)) {
-          prompt <- list(list(role = "user", content = prompt))
-      } 
-      # Case 2: prompt is a single message object list(content=..., role=...) -> wrap in list()
-      else if (is.list(prompt) && "role" %in% names(prompt) && "content" %in% names(prompt)) {
-          prompt <- list(prompt)
-      }
-      # Case 3: prompt is already list(list(role=..., content=...), ...) -> do nothing
-  }
-  
+  # Don't know how to get model parameter from user input, need help#
+  #user_model <- .key_info$user_model
+  user_model <- "glm-4"
+  # If api_key is provided, use it instead of the one from settings
+  key_to_use <- if (!is.null(api_key)) api_key else .key_info$key
+  if (is.null(key_to_use)) stop("API key for chatglm is missing.")
   url <- "https://open.bigmodel.cn/api/paas/v4/chat/completions"
   header <- list("alg" = "HS256",
                  "sign_type" = "SIGN")
-                 
-  key_to_use <- if (!is.null(api_key)) api_key else .key_info$key
-  if (is.null(key_to_use)) stop("API key for chatglm is missing.")
-  
   .token <- unlist(strsplit(key_to_use, split= "[.]"))
-
+  id     <- .token[1]
   secret <- .token[2]
-  id <- .token[1]
 
   timeStamp <- trunc(as.numeric(Sys.time()) * 1e3)
   payload <- list("api_key" = id,
@@ -87,13 +65,8 @@ get_translate_text.chatglm <- function(response) {
                "model"    = user_model,
                "stream"   = "false"
               )
-  if (!is.null(max_tokens)) {
-      body$max_tokens <- max_tokens
-  }
-  
   body_json <- jsonlite::toJSON(body, auto_unbox = TRUE)
-  
-  headers <- c("Content-Type" = "application/json",
+  headers <- list("Content-Type" = "application/json",
                   "Authorization"= auth_header)
   
   req <- httr2::request(url) |>
@@ -132,7 +105,7 @@ get_translate_text.chatglm <- function(response) {
             role   = "user"),
       list(content = 'Ok, I will only summarize the text,never interpret it.',
           role   = "assistant"),
-      list(content = if(is.null(prefix)) x else sprintf("%s\n\"\"\"%s\"\"\"", prefix, x), role = role)
+      .chatglm_prompt(x, prefix = prefix, role = role)
   )
 }
 
@@ -142,7 +115,7 @@ get_translate_text.chatglm <- function(response) {
             role    = "user"),
       list(content = "Ok, I will only translate the text content, never interpret it.",
             role    = "assistant"),
-      list(content = if(is.null(prefix)) x else sprintf("%s\n\"\"\"%s\"\"\"", prefix, x), role = role)
+      .chatglm_prompt(x, prefix = prefix, role = role)
   )
 }
 
@@ -153,5 +126,5 @@ get_translate_text.chatglm <- function(response) {
     content <- sprintf("%s\n\"\"\"%s\"\"\"", prefix, x)
   }
 
-  list(list(content = content, role = role))
+  list(content = content, role = role)
 }

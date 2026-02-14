@@ -1,6 +1,7 @@
 # fanyi 0.1.1
 
 + fixed API key passing in `chat_request()` and `.deepseek_query_messages()`: allow passing `api_key` directly without needing to set via `set_translate_option()` (2026-01-26, Mon)
++ restore ChatGLM compatibility: revert to pre-0.1.0 implementation to fix JSON parsing errors with glm-4.7 model (2026-02-14, Fri)
 
 # fanyi 0.1.0
 
